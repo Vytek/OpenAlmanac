@@ -47,7 +47,7 @@ public class AlmanacList extends Activity {
     private static final String ALMANAC_DATABASE_TABLE = "Saints";
     private static final double MOON_PHASE_LENGTH = 29.530588853;
     
-    private boolean mIsNorthernHemi;
+    private boolean mIsNorthernHemi = true;
    	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
