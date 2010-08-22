@@ -8,10 +8,12 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
+import java.util.TimeZone;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -48,11 +50,46 @@ public class AlmanacList extends Activity {
     private static final double MOON_PHASE_LENGTH = 29.530588853;
     
     private boolean mIsNorthernHemi = true;
+    
+	/**
+	 * get if this is the first run
+	 *
+	 * @return returns true, if this is the first run
+	 */
+	 public boolean getFirstRun() {
+	     return mPrefs.getBoolean("firstRun", true);
+	 }
+	
+	 /**
+	  * store the first run
+	  */
+	  public void setRunned() {
+	      SharedPreferences.Editor edit = mPrefs.edit();
+	      edit.putBoolean("firstRun", false);
+	      edit.commit();
+	  }
+	  
+	  SharedPreferences mPrefs;
+
+
+	  /**
+	  * setting up preferences storage
+	  */
+	  public void firstRunPreferences() {
+	      Context mContext = this.getApplicationContext();
+	      mPrefs = mContext.getSharedPreferences("AlmanacPrefs", 0); //0 = mode private:
+	                                                               //only this app can
+	                                                               //read these preferences
+	   }
    	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.almanaclist);
+        
+        //Attiva controllo FirstRun
+        //Activate check FirstRun
+        firstRunPreferences();
         
         //Crea un gradiente di colore in background
         //Create a gradient
@@ -89,7 +126,17 @@ public class AlmanacList extends Activity {
         //problemi nella fase di OnPause quando premo Back così invece non ottengo errori
         //e viene fatta la normale copia del DB (13/8/2010 23.18)
         //db = aSQLiteDatabaseAdapter.getWritableDatabase();
-        db = aSQLiteDatabaseAdapter.getDatabase();
+        //Per ovviare a questo problema controllo se è la prima volta che chiamo applicazione
+        if(getFirstRun())
+        {
+        	db = aSQLiteDatabaseAdapter.getDatabase();
+        	setRunned();
+        }
+        else
+        {
+        	db = aSQLiteDatabaseAdapter.getWritableDatabase();
+        }
+        
         Configuration conf = new Configuration();
         Settings.System.getConfiguration(getContentResolver(), conf);
         //String strTest = Integer.toString(cal.get(Calendar.DATE))+ "/" + Integer.toString(cal.get(Calendar.MONTH));
@@ -112,8 +159,14 @@ public class AlmanacList extends Activity {
     	Location location = new Location(Double.toString(m_latlong[0]), Double.toString(m_latlong[1]));  
     	   
     	// Create calculator object with the location and time zone identifier.  
-    	SunriseSunsetCalculator calculator = new SunriseSunsetCalculator(location, cal.getTimeZone().getDisplayName(conf.locale));  
+    	SunriseSunsetCalculator calculator = new SunriseSunsetCalculator(location, cal.getTimeZone().getDisplayName(true, TimeZone.SHORT, conf.locale));  
     	Log.d(TAG, "TimeZone: "+cal.getTimeZone().getDisplayName(conf.locale));
+    	Log.d(TAG, "Time Zone Short: "+cal.getTimeZone().getDisplayName(true, TimeZone.SHORT, conf.locale));
+		    	String[] TZSTR = TimeZone.getAvailableIDs();
+		    	//Stampa tutti i TimeZone Disponibili
+		    	for(int i=0;i<TZSTR.length;i++){
+		    		Log.d(TAG, TZSTR[i]);
+		    	}
     	
     	//Calendar date = Calendar.getInstance();  
     	String dawn = calculator.getCivilSunriseForDate(cal);  
