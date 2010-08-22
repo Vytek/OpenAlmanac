@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.google.android.almanac"
-      android:versionCode="1"
-      android:versionName="1.0.0">
-   <application android:icon="@drawable/icon" android:label="@string/app_name">
-      <activity android:name=".getSplashy" android:label="@string/app_name">
+      android:versionCode="12"
+      android:versionName="0.0.12">
+   <application android:debuggable="true" android:icon="@drawable/icon" android:label="@string/app_name">
+       <activity android:name=".getSplashy" android:label="@string/app_name">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
                 <action android:name="android.intent.action.MAIN" />
@@ -18,5 +18,18 @@
         		<category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
+            <activity	android:name=".AlmanacInfo"
+    			android:label="@string/almanacinfo"
+    			android:theme="@android:style/Theme.NoTitleBar"/>    			
+    		<activity	android:name=".AlmanacList"
+    			android:label="@string/almanacevents"
+    			android:theme="@android:style/Theme.NoTitleBar"/>        
     </application>
+    <uses-sdk android:minSdkVersion="3"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+	<uses-permission android:name="android.permission.ACCESS_LOCATION" />
 </manifest> 

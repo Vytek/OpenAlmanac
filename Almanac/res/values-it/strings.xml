@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">Almanac</string>
+	<string name="almanacinfo">Informazioni</string>
+	<string name="almanacevents">Eventi</string>
+	<string name="todayis_label">Oggi è:</string>
+	<string name="stardate_label">Data Stellare:</string>
+	<string name="saintofday_label">Santo del giorno:</string>
+	<string name="sunrisesunsite_label">Il sole sorge/tramonta:</string>
+	<string name="moonphase_label">Fase lunare:</string>
+	<string name="new_moon">Luna nuova</string>
+    <string name="first_quarter">Primo quarto</string>    
+    <string name="full_moon">Luna piena</string>
+    <string name="third_quarter">Ultimo quarto</string>    
+    <string name="waxing_crescent">Luna crescente</string>
+    <string name="waxing_gibbous">Gibbosa crescente</string>    
+    <string name="waning_gibbous">Gibbosa calante</string>
+    <string name="waning_crescent">Mezzaluna calante</string>    
+    <string name="today_label">Oggi</string>    
+    <string name="choose_date_label">Scegli data</string>
+    <string name="vocalize_label">Vocalizza</string>
+    <string name="screenshot_label">Cattura schermo</string>
+    <string name="copytoclipboard_label">Copia in Appunti</string>
+    <string name="copiedtoclipboard_label">Dati copiati negli appunti!</string>
+    <string name="notyetimplemented_label">Funzione non ancora realizzata!</string>
+	<string-array name="daysofweek_label">
+		<item>Domenica</item>
+		<item>Lunedì</item>
+		<item>Martedì</item>
+		<item>Mercoledì</item>
+		<item>Giovedì</item>
+		<item>Venerdì</item>
+		<item>Sabato</item>
+	</string-array>
+	<string-array name="monthsofyear_label">
+		<item>Gennaio</item>
+		<item>Febbraio</item>
+		<item>Marzo</item>
+		<item>Aprile</item>
+		<item>Maggio</item>
+		<item>Giugno</item>
+		<item>Luglio</item>
+		<item>Agosto</item>
+		<item>Settembre</item>
+		<item>Ottobre</item>
+		<item>Novembre</item>
+		<item>Dicembre</item>
+	</string-array>
+</resources>

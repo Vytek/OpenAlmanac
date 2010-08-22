@@ -1,0 +1,59 @@
+10.15 22/08/2010
+
+Versione 0.0.13
+
+- Inserito minimo API Level necessario: <uses-sdk android:minSdkVersion="3"/>
+- Cambiato nome per Debug su: AlmanacSQLiteDatabaseAdapter
+- Aggiornati tutti i riferimenti per link e credits di tutte le icone utilizzate
+
+
+17.24 14/08/2010
+
+- Inserite nuove icone per Data corrente ed Alba e tramonto, Santo del giorno 
+(Verificare comunque tutte le licenze che siano compatibili con la GPL 3)
+
+15.26 sabato 14 agosto 2010
+
+Versione 0.0.12
+
+- Funzione e visualizzazione Alba e tramonto
+- Reso Debugabble=True nell'AndroidManifest
+- Debug vario (C'e' ancora molto da fare :-(
+
+23.19 13/08/2010
+
+Versione 0.0.11
+
+//OK Dovrei usare aSQLiteDatabaseAdapter.getDatabase(); ma questo crea
+//problemi nella fase di OnPause quando premo Back così invece non ottengo errori
+//e viene fatta la normale copia del DB (13/8/2010 23.18)
+- Messo: db = aSQLiteDatabaseAdapter.getWritableDatabase();
+- Aggiunta funzione per copia dei dati calcolati su Clipboard con relativa localizzazione
+
+11.45 07/08/2010
+
+Versione 0.0.10
+
+- Inseriti 2 mesi (Gennaio, Agosto) nel db Almanac
+- Modificati file di Help/Informazione per renderli più chiari e semplici
+- Traduzione e localizzazione etichette Menù e messaggi di errore.
+- Inizio creazione funzione per interrogazione  DB Santo del giorno
+- Modifica DB fatta da Elisabetta
+
+23.05 05/08/2010
+
+Versione 0.0.9
+
+- Aggiunta funzione che mostra fase lunare con tanto di immagine
+- Localizzato Label Menù
+- Localizzazione e caricamento a seconda della lingua della Maschera di Help/Informazione
+- Nuova icona Star Trek da Wikipedia
+- Scelta definitiva numero ed icone Menù in ActivityList
+
+19.32 03/08/2010
+
+Versione 0.0.8
+
+- Aggiunta funzione per screeshot maschera principale
+- Localizzato in due lingue vari elementi maschera principale
+- Creato classe Singleton per AlmanacUtility

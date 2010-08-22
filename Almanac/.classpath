@@ -2,5 +2,8 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
+	<classpathentry kind="src" path="gen"/>
+	<classpathentry kind="lib" path="libs/SunriseSunsetCalculator-1.0-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="libs/stardate.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
