@@ -13,7 +13,7 @@ public class getSplashy extends Activity
 	boolean m_bSplashActive;
 	boolean m_bPaused;
 	
-	long m_dwSplashTime = 3000;
+	long m_dwSplashTime = 2000;
 	
     @Override
     public void onCreate(Bundle icicle) 

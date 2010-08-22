@@ -1,5 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Hello World, Almanac</string>
     <string name="app_name">Almanac</string>
+	<string name="almanacinfo">Information</string>
+	<string name="almanacevents">Events</string>
+	<string name="todayis_label">Today is:</string>
+	<string name="stardate_label">Stardate:</string>
+	<string name="saintofday_label">Memorial of:</string>
+	<string name="sunrisesunsite_label">Sunrise/Sunset:</string>
+	<string name="moonphase_label">Moon phase:</string>
+	<string name="new_moon">New moon</string>
+    <string name="first_quarter">First quarter</string>    
+    <string name="full_moon">Full moon</string>
+    <string name="third_quarter">Third quarter</string>    
+    <string name="waxing_crescent">Waxing crescent</string>
+    <string name="waxing_gibbous">Waxing gibbous</string>    
+    <string name="waning_gibbous">Waning gibbous</string>
+    <string name="waning_crescent">Waning crescent</string>    
+    <string name="today_label">Today</string>    
+    <string name="choose_date_label">Choose date</string>
+    <string name="vocalize_label">Vocalize</string>
+    <string name="screenshot_label">Screeshot</string>
+    <string name="copytoclipboard_label">Copy to clipboard</string>
+    <string name="copiedtoclipboard_label">Data copied to the clipboard!</string>
+    <string name="notyetimplemented_label">Not yet implemented!</string>
+	<string-array name="daysofweek_label">
+		<item>Sunday</item>
+		<item>Monday</item>
+		<item>Tuesday</item>
+		<item>Wednesday</item>
+		<item>Thursday</item>
+		<item>Friday</item>
+		<item>Saturday</item>
+	</string-array>
+	<string-array name="monthsofyear_label">
+		<item>January</item>
+		<item>February</item>
+		<item>March</item>
+		<item>April</item>
+		<item>May</item>
+		<item>June</item>
+		<item>July</item>
+		<item>August</item>
+		<item>September</item>
+		<item>October</item>
+		<item>November</item>
+		<item>December</item>
+	</string-array>
 </resources>
