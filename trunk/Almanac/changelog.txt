@@ -5,6 +5,7 @@ Versione 0.0.13
 - Inserito minimo API Level necessario: <uses-sdk android:minSdkVersion="3"/>
 - Cambiato nome per Debug su: AlmanacSQLiteDatabaseAdapter
 - Aggiornati tutti i riferimenti per link e credits di tutte le icone utilizzate
+- Esportato il tutto tramite Subversive su questo Repository
 
 
 17.24 14/08/2010
