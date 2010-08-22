@@ -6,7 +6,9 @@ Versione 0.0.13
 - Cambiato nome per Debug su: AlmanacSQLiteDatabaseAdapter
 - Aggiornati tutti i riferimenti per link e credits di tutte le icone utilizzate
 - Esportato il tutto tramite Subversive su questo Repository
-- Prima soluzione per errore nella creazione e copia del db all'avvio. Rifare Debug e maggiore controllo.
+- Prima soluzione per errore nella creazione e copia del db all'avvio.
+  Risolto non veniva creata la directory dove risiede il db
+- Aggiunto al buffer di copia anche stringa ed orari di Alba e tramonto
 
 17.24 14/08/2010
 

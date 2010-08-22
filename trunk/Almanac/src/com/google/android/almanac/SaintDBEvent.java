@@ -11,37 +11,36 @@ import android.database.sqlite.SQLiteDatabase;
  * @author Enrico Speranza
  */
 public class SaintDBEvent {
-	
-	private String SaintName="";
-	private String SaintDescription="";
-	
-	static SaintDBEvent getByDateAndLang (String Date, String Lang, SQLiteDatabase db)
-	{
-		String [] args = {Date, Lang};
-		Cursor c = db.rawQuery("SELECT * FROM Saints WHERE SaintDate=? AND SaintLanguage=?", args);
+
+	private String SaintName = "";
+	private String SaintDescription = "";
+
+	static SaintDBEvent getByDateAndLang(String Date, String Lang,
+			SQLiteDatabase db) {
+		String[] args = { Date, Lang };
+		Cursor c = db.rawQuery(
+				"SELECT * FROM Saints WHERE SaintDate=? AND SaintLanguage=?",
+				args);
 		c.moveToFirst();
-		
+
 		SaintDBEvent result = new SaintDBEvent().loadFrom(c);
 		c.close();
-		
-		return(result);		
-	}
-	
-	SaintDBEvent loadFrom(Cursor c)
-	{
-		SaintName=c.getString(c.getColumnIndex("SaintName"));
-		SaintDescription=c.getString(c.getColumnIndex("SaintDescription"));
-		
-		return(this);
-	}
-	
-	public String getSaintName()
-	{
-		return(SaintName);
+
+		return (result);
 	}
 
-	public String getSaintDescription()
-	{
-		return(SaintDescription);
+	SaintDBEvent loadFrom(Cursor c) {
+		SaintName = c.getString(c.getColumnIndex("SaintName"));
+		SaintDescription = c.getString(c.getColumnIndex("SaintDescription"));
+
+		return (this);
+	}
+
+	public String getSaintName() {
+		return (SaintName);
+	}
+
+	public String getSaintDescription() {
+		return (SaintDescription);
 	}
 }

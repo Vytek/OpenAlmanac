@@ -13,44 +13,46 @@ import android.widget.Toast;
 
 public class AlmanacScreenShot {
 
-    public static void shot(Context context, View view, String appName) {
+	public static void shot(Context context, View view, String appName) {
 
-    	try {
-    		
-    		Bitmap bm;		
-    		// gets the bitmap from the view
-    		view.setDrawingCacheEnabled(true);
-    		bm = Bitmap.createBitmap(view.getDrawingCache());
+		try {
 
-    		// sets files properties
-    		String filename = String.valueOf(System.currentTimeMillis()) ;
-    		filename = appName+"_"+filename;
-    		ContentValues values = new ContentValues();
-    		values.put(Images.Media.TITLE, filename);
-    		values.put(Images.Media.DATE_ADDED, System.currentTimeMillis());
-    		values.put(Images.Media.MIME_TYPE, "image/jpeg");
+			Bitmap bm;
+			// gets the bitmap from the view
+			view.setDrawingCacheEnabled(true);
+			bm = Bitmap.createBitmap(view.getDrawingCache());
 
-    		// gets image directory
-    		Uri uri = context.getContentResolver().insert(Images.Media.EXTERNAL_CONTENT_URI, values);
+			// sets files properties
+			String filename = String.valueOf(System.currentTimeMillis());
+			filename = appName + "_" + filename;
+			ContentValues values = new ContentValues();
+			values.put(Images.Media.TITLE, filename);
+			values.put(Images.Media.DATE_ADDED, System.currentTimeMillis());
+			values.put(Images.Media.MIME_TYPE, "image/jpeg");
 
-    		// save image
-    		OutputStream outStream = context.getContentResolver().openOutputStream(uri);
-    		bm.compress(Bitmap.CompressFormat.JPEG, 90, outStream);
-    		outStream.flush();
-    		outStream.close();
+			// gets image directory
+			Uri uri = context.getContentResolver().insert(
+					Images.Media.EXTERNAL_CONTENT_URI, values);
 
-    		CharSequence text = "Saving: "+filename;
-    		Toast toast = Toast.makeText(context, text, Toast.LENGTH_LONG);
-    		toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-    		toast.show();
+			// save image
+			OutputStream outStream = context.getContentResolver()
+					.openOutputStream(uri);
+			bm.compress(Bitmap.CompressFormat.JPEG, 90, outStream);
+			outStream.flush();
+			outStream.close();
 
-    	} catch (Exception e) {
-    		CharSequence text = "Fatal error: " + e.getMessage();
-    		Toast toast = Toast.makeText(context, text, Toast.LENGTH_LONG);
-    		toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-    		toast.show();
-    	}
+			CharSequence text = "Saving: " + filename;
+			Toast toast = Toast.makeText(context, text, Toast.LENGTH_LONG);
+			toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+			toast.show();
 
-    }
+		} catch (Exception e) {
+			CharSequence text = "Fatal error: " + e.getMessage();
+			Toast toast = Toast.makeText(context, text, Toast.LENGTH_LONG);
+			toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+			toast.show();
+		}
+
+	}
 
 }
