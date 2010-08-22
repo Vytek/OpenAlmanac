@@ -70,16 +70,16 @@ public class AlmanacList extends Activity {
 	  }
 	  
 	  SharedPreferences mPrefs;
-
-
+	
+	
 	  /**
 	  * setting up preferences storage
 	  */
 	  public void firstRunPreferences() {
 	      Context mContext = this.getApplicationContext();
 	      mPrefs = mContext.getSharedPreferences("AlmanacPrefs", 0); //0 = mode private:
-	                                                               //only this app can
-	                                                               //read these preferences
+	                                                           //only this app can
+	                                                           //read these preferences
 	   }
    	
 	@Override
