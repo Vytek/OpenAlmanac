@@ -167,6 +167,7 @@ public class AlmanacList extends Activity {
 		Log.d(TAG, "TimeZone Short: "
 				+ cal.getTimeZone().getDisplayName(true, TimeZone.SHORT,
 						conf.locale));
+		Log.d(TAG, "TimeZone Correct?: " + cal.getTimeZone().getID());
 		String[] TZSTR = TimeZone.getAvailableIDs();
 		// Stampa tutti i TimeZone Disponibili
 		for (int i = 0; i < TZSTR.length; i++) {
