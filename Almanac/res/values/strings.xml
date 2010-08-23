@@ -5,6 +5,7 @@
 	<string name="almanacevents">Events</string>
 	<string name="todayis_label">Today is:</string>
 	<string name="stardate_label">Stardate:</string>
+	<string name="islamic_calendar_label">Islamic calendar:</string>
 	<string name="saintofday_label">Memorial of:</string>
 	<string name="sunrisesunsite_label">Sunrise/Sunset:</string>
 	<string name="moonphase_label">Moon phase:</string>

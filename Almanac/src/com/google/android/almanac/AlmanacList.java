@@ -30,6 +30,7 @@ import android.graphics.Color;
 import org.stardate.Stardate;
 import com.luckycatlabs.sunrisesunset.dto.Location;
 import com.luckycatlabs.sunrisesunset.SunriseSunsetCalculator;
+import astroLib.HijriCalendar;
 
 public class AlmanacList extends Activity {
 
@@ -42,6 +43,7 @@ public class AlmanacList extends Activity {
 	private String[] strMonths = null;
 	private String dawn = null;
 	private String dusk = null;
+	private String hijriDate = null;
 	private double[] m_latlong;
 	private static final String TAG = "AlmanacList";
 	private static final String ALMANAC_DATABASE_NAME = "almanac.db";
@@ -91,7 +93,7 @@ public class AlmanacList extends Activity {
 		firstRunPreferences();
 
 		// Crea un gradiente di colore in background
-		// Create a gradient
+		// Create a background gradient
 		GradientDrawable grad = new GradientDrawable(Orientation.TOP_BOTTOM,
 				new int[] { Color.DKGRAY, Color.BLACK });
 		this.getWindow().setBackgroundDrawable(grad);
@@ -103,7 +105,8 @@ public class AlmanacList extends Activity {
 		SimpleDateFormat formatPattern = new SimpleDateFormat("yyyy");
 		String nowYearFormatted = formatPattern.format(date);
 
-		// Data Stellare / Star Date (Start Trek)
+		// Data Stellare 
+		// Star Date (Star Trek)
 		m_stardate = new Stardate();
 		m_stardate.setGregorian(new GregorianCalendar());
 		// m_stardate.toString();
@@ -159,9 +162,11 @@ public class AlmanacList extends Activity {
 				.toString(m_latlong[1]));
 
 		// Create calculator object with the location and time zone identifier.
-		SunriseSunsetCalculator calculator = new SunriseSunsetCalculator(
+		/*SunriseSunsetCalculator calculator = new SunriseSunsetCalculator(
 				location, cal.getTimeZone().getDisplayName(true,
-						TimeZone.SHORT, conf.locale));
+						TimeZone.SHORT, conf.locale));*/
+		SunriseSunsetCalculator calculator = new SunriseSunsetCalculator(
+				location, cal.getTimeZone().getID());
 		Log.d(TAG, "TimeZone: "
 						+ cal.getTimeZone().getDisplayName(conf.locale));
 		Log.d(TAG, "TimeZone Short: "
@@ -170,9 +175,9 @@ public class AlmanacList extends Activity {
 		Log.d(TAG, "TimeZone Correct?: " + cal.getTimeZone().getID());
 		String[] TZSTR = TimeZone.getAvailableIDs();
 		// Stampa tutti i TimeZone Disponibili
-		for (int i = 0; i < TZSTR.length; i++) {
+		/*for (int i = 0; i < TZSTR.length; i++) {
 			Log.d(TAG, TZSTR[i]);
-		}
+		}*/
 
 		// Calendar date = Calendar.getInstance();
 		dawn = calculator.getCivilSunriseForDate(cal);
@@ -181,6 +186,15 @@ public class AlmanacList extends Activity {
 		// String dusk = calculator.getOfficialSunsetForDate(cal);
 		Log.d(TAG, "CivilSunrise: " + dawn);
 		Log.d(TAG, "CivilSunset: " + dusk);
+		
+		// Calcola il calendario Islamico
+		// Get Hijri Calendar
+		HijriCalendar hijriCalendar = new HijriCalendar(cal.get(Calendar.YEAR),
+				(cal.get(Calendar.MONTH) + 1),cal.get(Calendar.DATE));
+		Log.d(TAG, "Islamic data insert: "+Integer.toString(cal.get(Calendar.YEAR))+","+
+				Integer.toString(cal.get(Calendar.MONTH) + 1)+","+
+				Integer.toString(cal.get(Calendar.DATE)));
+        hijriDate = hijriCalendar.getHicriTakvim();
 
 		// Create an array of days
 		strDays = getResources().getStringArray(R.array.daysofweek_label);
@@ -199,17 +213,16 @@ public class AlmanacList extends Activity {
 								+ nowYearFormatted, R.drawable.clock),
 				new Event(getResources().getString(R.string.stardate_label),
 						m_stardate.toStardateString(), R.drawable.treklogo),
+				new Event(getResources().getString(R.string.islamic_calendar_label),					
+						hijriDate, R.drawable.islamlogo),
 				new Event(current.getSaintName(),
 						current.getSaintDescription(), R.drawable.angel),
-				// new
-				// Event(getResources().getString(R.string.saintofday_label),"Santa Elisabetta d'Ungheria",R.drawable.creep_3),
 				new Event(getResources().getString(
 						R.string.sunrisesunsite_label), dawn + "," + dusk,
 						R.drawable.sunrise),
 				new Event(getResources().getString(R.string.moonphase_label),
 						getResources().getString(getPhaseText(phaseValue)),
-						IMAGE_LOOKUP[phaseValue]),
-				new Event("Vytek", "Scheflo", R.drawable.creep_2) };
+						IMAGE_LOOKUP[phaseValue])};
 
 		// riempimento casuale della lista delle persone
 		// Random r=new Random();
@@ -264,6 +277,8 @@ public class AlmanacList extends Activity {
 		// Utilizzo dell'adapter
 		((ListView) findViewById(R.id.eventListView)).setAdapter(adapter);
 	}
+	
+	//Classe per GPS
 
 	// Close db onDestroy
 	// Chiudi il db quando viene distrutta l'Activity
@@ -291,6 +306,8 @@ public class AlmanacList extends Activity {
 				+ ", " + cal.get(Calendar.DATE) + " "
 				+ strMonths[cal.get(Calendar.MONTH)] + "\n");
 		// " "+nowYearFormatted;
+		strBuffer.append(getResources().getString(R.string.islamic_calendar_label));
+		strBuffer.append(" " + hijriDate + "\n");
 		strBuffer.append(getResources().getString(R.string.stardate_label));
 		strBuffer.append(" " + m_stardate.toStardateString() + "\n");
 		strBuffer.append(current.getSaintName() + " "

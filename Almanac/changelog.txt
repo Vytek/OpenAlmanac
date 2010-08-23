@@ -1,3 +1,13 @@
+22.37 lunedì 23 agosto 2010
+
+Versione 0.0.14
+
+- Aggiunta visualizzazione Calendario Islamico (Libreria: http://code.google.com/p/hijricalendar/)
+- BUGFIX: corretto errore visualizzazione grazie a JD (http://www.anddev.it/index.php/topic,693.msg4565.html#msg4565)
+- Inizio Debug TimeZome:  Instead of calling cal.getTimeZone().getDisplayName(), use cal.getTimeZone().getID().
+- Aggiornato help HTML con tutti i sorgenti e librerie utilizzate
+- Debug vario
+
 10.15 22/08/2010
 
 Versione 0.0.13
