@@ -13,6 +13,9 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+import android.location.Criteria;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.text.ClipboardManager;
@@ -49,6 +52,8 @@ public class AlmanacList extends Activity {
 	private static final String ALMANAC_DATABASE_NAME = "almanac.db";
 	private static final String ALMANAC_DATABASE_TABLE = "Saints";
 	private static final double MOON_PHASE_LENGTH = 29.530588853;
+	private LocationManager locationManager;
+	private Criteria criteria;
 
 	private boolean mIsNorthernHemi = true;
 
@@ -154,13 +159,38 @@ public class AlmanacList extends Activity {
 		// Get GPS Location!
 		AlmanacUtility almanac = AlmanacUtility.getInstance();
 		m_latlong = almanac.getGPS(this);
+		
+		// *********************
+		// Get GPS with Listener
+		// *********************
+		// Get a reference to the LocationManager.	  
+	    locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+
+	    // Define a set of criteria used to select a location provider.
+	    criteria = new Criteria();
+	    criteria.setAccuracy(Criteria.ACCURACY_FINE);
+	    criteria.setAltitudeRequired(false);
+	    criteria.setBearingRequired(false);
+	    criteria.setCostAllowed(true);
+	    criteria.setPowerRequirement(Criteria.POWER_LOW);
+	    
+	    // Find a Location Provider to use.
+	    String provider = locationManager.getBestProvider(criteria, true);
+
+	    // Update with the last known position.
+	    android.location.Location Almanaclocation = locationManager.getLastKnownLocation(provider);
+	    // Register the LocationListener to listen for location changes
+	    // using the provider found above.
+	    locationManager.requestLocationUpdates(provider, 2000, 10, locationListener);
+		
 		Log.d(TAG, "Lat: " + Double.toString(m_latlong[0]));
 		Log.d(TAG, "Long: " + Double.toString(m_latlong[1]));
 		// Calcola Sunrise/Sunset
 		// Location of sunrise/set, as latitude/longitude.
-		Location location = new Location(Double.toString(m_latlong[0]), Double
-				.toString(m_latlong[1]));
-
+		//Location location = new Location(Double.toString(m_latlong[0]), Double
+		//		.toString(m_latlong[1]));
+		Location location = new Location(Double.toString(Almanaclocation.getLatitude()), Double
+				.toString(Almanaclocation.getLongitude()));
 		// Create calculator object with the location and time zone identifier.
 		/*SunriseSunsetCalculator calculator = new SunriseSunsetCalculator(
 				location, cal.getTimeZone().getDisplayName(true,
@@ -278,7 +308,43 @@ public class AlmanacList extends Activity {
 		((ListView) findViewById(R.id.eventListView)).setAdapter(adapter);
 	}
 	
-	//Classe per GPS
+	//Meotdi per GPS
+	private final LocationListener locationListener = new LocationListener() {
+		@Override
+		public void onLocationChanged(android.location.Location location) {
+			
+			// Geocode your current location to find an address.
+			String latLongString = "";
+			
+			if (location != null) {
+			      double lat = location.getLatitude();
+			      double lng = location.getLongitude();
+			      latLongString = "Lat:" + lat + "\nLong:" + lng;
+			      Log.d(TAG, latLongString);
+			      //double m_latlong[] = {lat,lng};
+			    } else {
+			      latLongString = "No location found";
+			    }
+			
+		}
+	   
+		@Override
+        public void onProviderDisabled(String provider)
+        {
+            Toast.makeText( getApplicationContext(), "Gps Disabled", Toast.LENGTH_SHORT ).show();
+        }
+ 
+        @Override
+        public void onProviderEnabled(String provider)
+        {
+            Toast.makeText( getApplicationContext(), "Gps Enabled", Toast.LENGTH_SHORT).show();
+        }
+ 
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras)
+        {
+        }
+	};	
 
 	// Close db onDestroy
 	// Chiudi il db quando viene distrutta l'Activity
@@ -295,6 +361,15 @@ public class AlmanacList extends Activity {
 
 		db.close();
 	}
+	
+	@Override 
+	  public void onStop() {
+	    // Unregister the LocationListener to stop updating the
+	    // GUI when the Activity isn't visible.
+	    locationManager.removeUpdates(locationListener);
+
+	    super.onStop();
+	  }
 
 	// Function to copy to Clipboard
 	// Funzione per copiare i dati generati nella clipboard
