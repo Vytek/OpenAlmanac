@@ -98,6 +98,25 @@ public class AlmanacList extends Activity {
 		// Attiva controllo FirstRun
 		// Activate check FirstRun
 		firstRunPreferences();
+		
+		// *********************
+		// Get GPS with Listener
+		// *********************
+		// Get a reference to the LocationManager.	  
+	    locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+  
+	    // Otteniamo il riferimento al LocationManager
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        // Verifichiamo se il GPS è abilitato altrimenti avvisiamo l'utente
+        if(!locationManager.isProviderEnabled("gps")){
+                Toast.makeText(this, "GPS è attualmente disabilitato. E' possibile abilitarlo dal menu impostazioni.", Toast.LENGTH_LONG).show();
+                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+        }
+        else
+        {	
+        	// Registriamo il LocationListener al provider GPS
+        	locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+        }
 
 		// Crea un gradiente di colore in background
 		// Create a background gradient
@@ -160,47 +179,10 @@ public class AlmanacList extends Activity {
 
 		// Get GPS Location!
 		AlmanacUtility almanac = AlmanacUtility.getInstance();
-		//m_latlong = almanac.getGPS(this);
+		//m_latlong = almanac.getGPS(this);   
 		
-		// *********************
-		// Get GPS with Listener
-		// *********************
-		// Get a reference to the LocationManager.	  
-	    locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-
-	    // Define a set of criteria used to select a location provider.
-	    criteria = new Criteria();
-	    criteria.setAccuracy(Criteria.ACCURACY_FINE);
-	    criteria.setAltitudeRequired(false);
-	    criteria.setBearingRequired(false);
-	    criteria.setCostAllowed(true);
-	    criteria.setPowerRequirement(Criteria.POWER_LOW);
-	    
-	    // Find a Location Provider to use.
-	    //String provider = locationManager.getBestProvider(criteria, true);
-
-	    // Update with the last known position.
-	    //android.location.Location Almanaclocation = locationManager.getLastKnownLocation(provider);
-	    // Register the LocationListener to listen for location changes
-	    // using the provider found above.
-	    //locationManager.requestLocationUpdates(provider, 2000, 10, locationListener);
-	    
-	    // Otteniamo il riferimento al LocationManager
-        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        // Verifichiamo se il GPS è abilitato altrimenti avvisiamo l'utente
-        if(!locationManager.isProviderEnabled("gps")){
-                Toast.makeText(this, "GPS è attualmente disabilitato. E' possibile abilitarlo dal menu impostazioni.", Toast.LENGTH_LONG).show();
-                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
-        }
-        else
-        {	
-        	// Registriamo il LocationListener al provider GPS
-        	locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-        }
-	    
-		
-		//Log.d(TAG, "Lat: " + Double.toString(m_latlong[0]));
-		//Log.d(TAG, "Long: " + Double.toString(m_latlong[1]));
+		Log.d(TAG, "Lat: " + Double.toString(lat));
+		Log.d(TAG, "Long: " + Double.toString(lng));
 		// Calcola Sunrise/Sunset
 		// Location of sunrise/set, as latitude/longitude.
 		Location location = new Location(Double.toString(lat), Double
@@ -340,6 +322,7 @@ public class AlmanacList extends Activity {
 			      //m_latlong = {lat,lng};
 			    } else {
 			      latLongString = "No location found";
+			      Log.d(TAG, latLongString);
 			    }
 			
 		}
