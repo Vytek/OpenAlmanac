@@ -1,3 +1,10 @@
+16.40 martedì 24 agosto 2010
+
+Versione 0.0.15
+
+- Dopo una dura lotta ho vinto! Gestione completa del LocationManager con Provider GPS o Network se non disponibile. Sicuramente da Ottimizzare
+  ma FUNZIONA!!
+
 22.37 lunedì 23 agosto 2010
 
 Versione 0.0.14
