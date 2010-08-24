@@ -48,6 +48,8 @@ public class AlmanacList extends Activity {
 	private String dusk = null;
 	private String hijriDate = null;
 	private double[] m_latlong;
+	private double lat;
+	private double lng;
 	private static final String TAG = "AlmanacList";
 	private static final String ALMANAC_DATABASE_NAME = "almanac.db";
 	private static final String ALMANAC_DATABASE_TABLE = "Saints";
@@ -158,7 +160,7 @@ public class AlmanacList extends Activity {
 
 		// Get GPS Location!
 		AlmanacUtility almanac = AlmanacUtility.getInstance();
-		m_latlong = almanac.getGPS(this);
+		//m_latlong = almanac.getGPS(this);
 		
 		// *********************
 		// Get GPS with Listener
@@ -175,22 +177,36 @@ public class AlmanacList extends Activity {
 	    criteria.setPowerRequirement(Criteria.POWER_LOW);
 	    
 	    // Find a Location Provider to use.
-	    String provider = locationManager.getBestProvider(criteria, true);
+	    //String provider = locationManager.getBestProvider(criteria, true);
 
 	    // Update with the last known position.
-	    android.location.Location Almanaclocation = locationManager.getLastKnownLocation(provider);
+	    //android.location.Location Almanaclocation = locationManager.getLastKnownLocation(provider);
 	    // Register the LocationListener to listen for location changes
 	    // using the provider found above.
-	    locationManager.requestLocationUpdates(provider, 2000, 10, locationListener);
+	    //locationManager.requestLocationUpdates(provider, 2000, 10, locationListener);
+	    
+	    // Otteniamo il riferimento al LocationManager
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        // Verifichiamo se il GPS è abilitato altrimenti avvisiamo l'utente
+        if(!locationManager.isProviderEnabled("gps")){
+                Toast.makeText(this, "GPS è attualmente disabilitato. E' possibile abilitarlo dal menu impostazioni.", Toast.LENGTH_LONG).show();
+                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+        }
+        else
+        {	
+        	// Registriamo il LocationListener al provider GPS
+        	locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+        }
+	    
 		
-		Log.d(TAG, "Lat: " + Double.toString(m_latlong[0]));
-		Log.d(TAG, "Long: " + Double.toString(m_latlong[1]));
+		//Log.d(TAG, "Lat: " + Double.toString(m_latlong[0]));
+		//Log.d(TAG, "Long: " + Double.toString(m_latlong[1]));
 		// Calcola Sunrise/Sunset
 		// Location of sunrise/set, as latitude/longitude.
-		//Location location = new Location(Double.toString(m_latlong[0]), Double
-		//		.toString(m_latlong[1]));
-		Location location = new Location(Double.toString(Almanaclocation.getLatitude()), Double
-				.toString(Almanaclocation.getLongitude()));
+		Location location = new Location(Double.toString(lat), Double
+				.toString(lng));
+		//Location location = new Location(Double.toString(Almanaclocation.getLatitude()), Double
+		//		.toString(Almanaclocation.getLongitude()));
 		// Create calculator object with the location and time zone identifier.
 		/*SunriseSunsetCalculator calculator = new SunriseSunsetCalculator(
 				location, cal.getTimeZone().getDisplayName(true,
@@ -317,11 +333,11 @@ public class AlmanacList extends Activity {
 			String latLongString = "";
 			
 			if (location != null) {
-			      double lat = location.getLatitude();
-			      double lng = location.getLongitude();
+			      lat = location.getLatitude();
+			      lng = location.getLongitude();
 			      latLongString = "Lat:" + lat + "\nLong:" + lng;
 			      Log.d(TAG, latLongString);
-			      //double m_latlong[] = {lat,lng};
+			      //m_latlong = {lat,lng};
 			    } else {
 			      latLongString = "No location found";
 			    }
