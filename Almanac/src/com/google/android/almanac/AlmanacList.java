@@ -55,6 +55,7 @@ public class AlmanacList extends Activity {
 	private static final String ALMANAC_DATABASE_TABLE = "Saints";
 	private static final double MOON_PHASE_LENGTH = 29.530588853;
 	private LocationManager locationManager;
+	private android.location.Location Almanaclocation;
 	private Criteria criteria;
 
 	private boolean mIsNorthernHemi = true;
@@ -179,14 +180,21 @@ public class AlmanacList extends Activity {
 
 		// Get GPS Location!
 		AlmanacUtility almanac = AlmanacUtility.getInstance();
-		//m_latlong = almanac.getGPS(this);   
+		//m_latlong = almanac.getGPS(this);
+		if(!locationManager.isProviderEnabled("gps")){
+			Almanaclocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+		}
+		else
+		{
+			Almanaclocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+		}
 		
-		Log.d(TAG, "Lat: " + Double.toString(lat));
-		Log.d(TAG, "Long: " + Double.toString(lng));
+		Log.d(TAG, "Lat: " + Double.toString(Almanaclocation.getLatitude()));
+		Log.d(TAG, "Long: " + Double.toString(Almanaclocation.getLongitude()));
 		// Calcola Sunrise/Sunset
 		// Location of sunrise/set, as latitude/longitude.
-		Location location = new Location(Double.toString(lat), Double
-				.toString(lng));
+		Location location = new Location(Double.toString(Almanaclocation.getLatitude()), Double
+				.toString(Almanaclocation.getLongitude()));
 		//Location location = new Location(Double.toString(Almanaclocation.getLatitude()), Double
 		//		.toString(Almanaclocation.getLongitude()));
 		// Create calculator object with the location and time zone identifier.
@@ -221,7 +229,7 @@ public class AlmanacList extends Activity {
 				(cal.get(Calendar.MONTH) + 1),cal.get(Calendar.DATE));
 		Log.d(TAG, "Islamic data insert: "+Integer.toString(cal.get(Calendar.YEAR))+","+
 				Integer.toString(cal.get(Calendar.MONTH) + 1)+","+
-				Integer.toString(cal.get(Calendar.DATE)));
+				Integer.toString(cal.get(Calendar.DAY_OF_MONTH)));
         hijriDate = hijriCalendar.getHicriTakvim();
 
 		// Create an array of days
@@ -306,7 +314,7 @@ public class AlmanacList extends Activity {
 		((ListView) findViewById(R.id.eventListView)).setAdapter(adapter);
 	}
 	
-	//Meotdi per GPS
+	//Metidi per GPS LocationListener
 	private final LocationListener locationListener = new LocationListener() {
 		@Override
 		public void onLocationChanged(android.location.Location location) {
