@@ -339,9 +339,7 @@ public class AlmanacList extends Activity {
 		((ListView) findViewById(R.id.eventListView)).setAdapter(adapter);
 	}
 	
-	//Metidi per GPS LocationListener
-	
-	
+	//Metodi per GPS LocationListener
 	private final LocationListener locationListener = new LocationListener() {
 		@Override
 		public void onLocationChanged(android.location.Location location) {
@@ -398,7 +396,7 @@ public class AlmanacList extends Activity {
 	}
 	
 	@Override 
-	  public void onStop() {
+	public void onStop() {
 //	    // Unregister the LocationListener to stop updating the
 //	    // GUI when the Activity isn't visible.
 //	    locationManager.removeUpdates(locationListener);
