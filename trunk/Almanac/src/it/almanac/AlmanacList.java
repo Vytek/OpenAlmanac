@@ -49,18 +49,20 @@ public class AlmanacList extends Activity {
 	private String dawn = null;
 	private String dusk = null;
 	private String hijriDate = null;
-	private double[] m_latlong;
+//	private double[] m_latlong;
 	private double lat;
 	private double lng;
 	private static final String TAG = "AlmanacList";
 	private static final String ALMANAC_DATABASE_NAME = "almanac.db";
-	private static final String ALMANAC_DATABASE_TABLE = "Saints";
+//	private static final String ALMANAC_DATABASE_TABLE = "Saints";
 	private static final double MOON_PHASE_LENGTH = 29.530588853;
+//	private android.location.Location Almanaclocation;
+	
 	private LocationManager locationManager;
-	private android.location.Location Almanaclocation;
-	private Criteria criteria;
+	private final static long MIN_TIME = 10 * 60000; //10 minuti
+	private final static float MIN_DIST = 1000; //1000 metri
 
-	private boolean mIsNorthernHemi = true;
+//	private boolean mIsNorthernHemi = true;
 
 	/**
 	 * get if this is the first run
@@ -92,6 +94,18 @@ public class AlmanacList extends Activity {
 		// only this app can
 		// read these preferences
 	}
+	
+	public static final Criteria getCriteria(){
+		Criteria criteria = new Criteria();
+		criteria.setAccuracy(Criteria.ACCURACY_COARSE);
+		criteria.setAltitudeRequired(false);
+		criteria.setBearingRequired(false);
+		criteria.setCostAllowed(false);
+		criteria.setPowerRequirement(Criteria.POWER_LOW);
+		criteria.setSpeedRequired(false);
+
+		return criteria;
+	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -106,7 +120,17 @@ public class AlmanacList extends Activity {
 		// Get GPS with Listener
 		// *********************
 		// Get a reference to the LocationManager.	  
-//	    locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		
+		String provider = locationManager.getBestProvider(getCriteria(), true);
+
+		Log.d(TAG, "Criteria: " + provider);
+		// Registriamo il LocationListener al provider GPS
+		if (provider != null) {
+			locationManager.requestLocationUpdates(provider, MIN_TIME, MIN_DIST, locationListener);
+		}else{
+			//Nessun profider trovato
+		}
 //  
 //	    // Otteniamo il riferimento al LocationManager
 //        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -316,6 +340,8 @@ public class AlmanacList extends Activity {
 	}
 	
 	//Metidi per GPS LocationListener
+	
+	
 	private final LocationListener locationListener = new LocationListener() {
 		@Override
 		public void onLocationChanged(android.location.Location location) {
@@ -329,6 +355,7 @@ public class AlmanacList extends Activity {
 			      latLongString = "Lat:" + lat + "\nLong:" + lng;
 			      Log.d(TAG, latLongString);
 			      //m_latlong = {lat,lng};
+			      locationManager.removeUpdates(locationListener);
 			    } else {
 			      latLongString = "No location found";
 			      Log.d(TAG, latLongString);
