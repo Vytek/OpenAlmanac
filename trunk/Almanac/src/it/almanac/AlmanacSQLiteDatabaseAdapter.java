@@ -1,4 +1,4 @@
-package com.google.android.almanac;
+package it.almanac;
 
 import java.io.File;
 import java.io.FileOutputStream;
