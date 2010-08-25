@@ -1,4 +1,4 @@
-package com.google.android.almanac;
+package it.almanac;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -39,7 +39,7 @@ public class AlmanacUtility {
 		return instance;
 	}
 
-	// La scheda SD è presente?
+	// La scheda SD ï¿½ presente?
 	/*
 	 * @return boolean return true if the application can access the SDCARD on
 	 * phone
@@ -50,7 +50,7 @@ public class AlmanacUtility {
 				android.os.Environment.MEDIA_MOUNTED);
 	}
 
-	// Calcolo età
+	// Calcolo etï¿½
 	/*
 	 * @return int return age from date (year, month, day)
 	 */

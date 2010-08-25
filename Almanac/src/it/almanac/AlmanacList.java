@@ -1,4 +1,4 @@
-package com.google.android.almanac;
+package it.almanac;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,6 +31,8 @@ import android.graphics.drawable.GradientDrawable.Orientation;
 import android.graphics.Color;
 
 import org.stardate.Stardate;
+
+import it.almanac.R;
 import com.luckycatlabs.sunrisesunset.dto.Location;
 import com.luckycatlabs.sunrisesunset.SunriseSunsetCalculator;
 import astroLib.HijriCalendar;
@@ -104,20 +106,20 @@ public class AlmanacList extends Activity {
 		// Get GPS with Listener
 		// *********************
 		// Get a reference to the LocationManager.	  
-	    locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-  
-	    // Otteniamo il riferimento al LocationManager
-        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        // Verifichiamo se il GPS è abilitato altrimenti avvisiamo l'utente
-        if(!locationManager.isProviderEnabled("gps")){
-                Toast.makeText(this, "GPS è attualmente disabilitato. E' possibile abilitarlo dal menu impostazioni.", Toast.LENGTH_LONG).show();
-                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
-        }
-        else
-        {	
-        	// Registriamo il LocationListener al provider GPS
-        	locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-        }
+//	    locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+//  
+//	    // Otteniamo il riferimento al LocationManager
+//        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+//        // Verifichiamo se il GPS ï¿½ abilitato altrimenti avvisiamo l'utente
+//        if(!locationManager.isProviderEnabled("gps")){
+//                Toast.makeText(this, "GPS ï¿½ attualmente disabilitato. E' possibile abilitarlo dal menu impostazioni.", Toast.LENGTH_LONG).show();
+//                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+//        }
+//        else
+//        {	
+//        	// Registriamo il LocationListener al provider GPS
+//        	locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+//        }
 
 		// Crea un gradiente di colore in background
 		// Create a background gradient
@@ -151,11 +153,11 @@ public class AlmanacList extends Activity {
 		AlmanacSQLiteDatabaseAdapter aSQLiteDatabaseAdapter = AlmanacSQLiteDatabaseAdapter
 				.getInstance(this, ALMANAC_DATABASE_NAME);
 		// OK Dovrei usare aSQLiteDatabaseAdapter.getDatabase(); ma questo crea
-		// problemi nella fase di OnPause quando premo Back così invece non
+		// problemi nella fase di OnPause quando premo Back cosï¿½ invece non
 		// ottengo errori
 		// e viene fatta la normale copia del DB (13/8/2010 23.18)
 		// db = aSQLiteDatabaseAdapter.getWritableDatabase();
-		// Per ovviare a questo problema controllo se è la prima volta che
+		// Per ovviare a questo problema controllo se ï¿½ la prima volta che
 		// chiamo applicazione
 		if (getFirstRun()) {
 			db = aSQLiteDatabaseAdapter.getDatabase();
@@ -180,21 +182,20 @@ public class AlmanacList extends Activity {
 
 		// Get GPS Location!
 		AlmanacUtility almanac = AlmanacUtility.getInstance();
-		//m_latlong = almanac.getGPS(this);
-		if(!locationManager.isProviderEnabled("gps")){
-			Almanaclocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-		}
-		else
-		{
-			Almanaclocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-		}
+//		//m_latlong = almanac.getGPS(this);
+//		if(!locationManager.isProviderEnabled("gps")){
+//			Almanaclocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+//		}
+//		else
+//		{
+//			Almanaclocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+//		}
 		
-		Log.d(TAG, "Lat: " + Double.toString(Almanaclocation.getLatitude()));
-		Log.d(TAG, "Long: " + Double.toString(Almanaclocation.getLongitude()));
+//		Log.d(TAG, "Lat: " + Double.toString(Almanaclocation.getLatitude()));
+//		Log.d(TAG, "Long: " + Double.toString(Almanaclocation.getLongitude()));
 		// Calcola Sunrise/Sunset
 		// Location of sunrise/set, as latitude/longitude.
-		Location location = new Location(Double.toString(Almanaclocation.getLatitude()), Double
-				.toString(Almanaclocation.getLongitude()));
+		Location location = new Location("8.0", "39.0");
 		//Location location = new Location(Double.toString(Almanaclocation.getLatitude()), Double
 		//		.toString(Almanaclocation.getLongitude()));
 		// Create calculator object with the location and time zone identifier.
@@ -203,13 +204,13 @@ public class AlmanacList extends Activity {
 						TimeZone.SHORT, conf.locale));*/
 		SunriseSunsetCalculator calculator = new SunriseSunsetCalculator(
 				location, cal.getTimeZone().getID());
-		Log.d(TAG, "TimeZone: "
-						+ cal.getTimeZone().getDisplayName(conf.locale));
-		Log.d(TAG, "TimeZone Short: "
-				+ cal.getTimeZone().getDisplayName(true, TimeZone.SHORT,
-						conf.locale));
-		Log.d(TAG, "TimeZone Correct?: " + cal.getTimeZone().getID());
-		String[] TZSTR = TimeZone.getAvailableIDs();
+//		Log.d(TAG, "TimeZone: "
+//						+ cal.getTimeZone().getDisplayName(conf.locale));
+//		Log.d(TAG, "TimeZone Short: "
+//				+ cal.getTimeZone().getDisplayName(true, TimeZone.SHORT,
+//						conf.locale));
+//		Log.d(TAG, "TimeZone Correct?: " + cal.getTimeZone().getID());
+//		String[] TZSTR = TimeZone.getAvailableIDs();
 		// Stampa tutti i TimeZone Disponibili
 		/*for (int i = 0; i < TZSTR.length; i++) {
 			Log.d(TAG, TZSTR[i]);
@@ -238,7 +239,7 @@ public class AlmanacList extends Activity {
 		// Create an array of months
 		strMonths = getResources().getStringArray(R.array.monthsofyear_label);
 
-		// Lista degli eventi che la listview visualizzerà 
+		// Lista degli eventi che la listview visualizzerï¿½
 		ArrayList<Event> eventList = new ArrayList<Event>();
 
 		Event[] events = {
@@ -371,9 +372,9 @@ public class AlmanacList extends Activity {
 	
 	@Override 
 	  public void onStop() {
-	    // Unregister the LocationListener to stop updating the
-	    // GUI when the Activity isn't visible.
-	    locationManager.removeUpdates(locationListener);
+//	    // Unregister the LocationListener to stop updating the
+//	    // GUI when the Activity isn't visible.
+//	    locationManager.removeUpdates(locationListener);
 
 	    super.onStop();
 	  }

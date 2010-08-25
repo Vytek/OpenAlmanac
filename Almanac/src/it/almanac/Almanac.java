@@ -1,4 +1,6 @@
-package com.google.android.almanac;
+package it.almanac;
+
+import it.almanac.R;
 
 import android.util.Log;
 import android.app.TabActivity;

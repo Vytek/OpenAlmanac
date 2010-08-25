@@ -1,4 +1,6 @@
-package com.google.android.almanac;
+package it.almanac;
+
+import it.almanac.R;
 
 import android.app.Activity;
 import android.util.Log;

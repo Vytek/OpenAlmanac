@@ -2,7 +2,7 @@
  * Class to query the Almanac db table Saints
  * Classe per richiesta verso db Almanac tabella Saints
  */
-package com.google.android.almanac;
+package it.almanac;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
