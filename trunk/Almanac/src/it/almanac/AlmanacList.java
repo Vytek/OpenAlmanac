@@ -128,6 +128,7 @@ public class AlmanacList extends Activity {
 			locationManager.requestLocationUpdates(provider, MIN_TIME, MIN_DIST, locationListener);
 		}else{
 			//Nessun provider trovato
+			//Do un messaggio d'errore
 		}
 		
 		// Crea un gradiente di colore in background
@@ -195,8 +196,9 @@ public class AlmanacList extends Activity {
 		//Log.d(TAG, "Lat: " + Double.toString(Almanaclocation.getLatitude()));
 		//Log.d(TAG, "Long: " + Double.toString(Almanaclocation.getLongitude()));
 		// Calcola Sunrise/Sunset
-		// Location of sunrise/set, as latitude/longitude. (TEST)
-		Location location = new Location("8.0", "39.0");
+		//Metto una location di default (in pratica sarà quella che l'utente
+		//sceglie nelle preference)
+		Location location = new Location("41.0", "12.0");
 		SunriseSunsetCalculator calculator = new SunriseSunsetCalculator(
 				location, cal.getTimeZone().getID());
 		Log.d(TAG, "TimeZone Correct: " + cal.getTimeZone().getID());
