@@ -6,7 +6,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
-import java.util.TimeZone;
 
 import android.app.Activity;
 import android.content.Context;
@@ -54,13 +53,13 @@ public class AlmanacList extends Activity {
 	private SimpleAdapter adapter;
 	private static final String TAG = "AlmanacList";
 	private static final String ALMANAC_DATABASE_NAME = "almanac.db";
-//	private static final String ALMANAC_DATABASE_TABLE = "Saints";
+	//	private static final String ALMANAC_DATABASE_TABLE = "Saints";
 	private static final double MOON_PHASE_LENGTH = 29.530588853;
-	
+
 	private LocationManager locationManager;
 	private final static long MIN_TIME = 10 * 60000; //10 minuti
 	private final static float MIN_DIST = 1000; //1000 metri
-//	private boolean mIsNorthernHemi = true;
+	//	private boolean mIsNorthernHemi = true;
 
 	/**
 	 * get if this is the first run
@@ -88,11 +87,11 @@ public class AlmanacList extends Activity {
 	public void firstRunPreferences() {
 		Context mContext = this.getApplicationContext();
 		mPrefs = mContext.getSharedPreferences("AlmanacPrefs", 0); // 0 = mode
-																	// private:
+		// private:
 		// only this app can
 		// read these preferences
 	}
-	
+
 	public static final Criteria getCriteria(){
 		Criteria criteria = new Criteria();
 		criteria.setAccuracy(Criteria.ACCURACY_COARSE);
@@ -113,13 +112,13 @@ public class AlmanacList extends Activity {
 		// Attiva controllo FirstRun
 		// Activate check FirstRun
 		firstRunPreferences();
-		
+
 		// *********************
 		// Get GPS with Listener
 		// *********************
 		// Get a reference to the LocationManager.	  
 		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-		
+
 		String provider = locationManager.getBestProvider(getCriteria(), true);
 
 		Log.d(TAG, "Criteria: " + provider);
@@ -130,7 +129,7 @@ public class AlmanacList extends Activity {
 			//Nessun provider trovato
 			//Do un messaggio d'errore
 		}
-		
+
 		// Crea un gradiente di colore in background
 		// Create a background gradient
 		GradientDrawable grad = new GradientDrawable(Orientation.TOP_BOTTOM,
@@ -161,7 +160,7 @@ public class AlmanacList extends Activity {
 
 		// Almanac for Saints
 		AlmanacSQLiteDatabaseAdapter aSQLiteDatabaseAdapter = AlmanacSQLiteDatabaseAdapter
-				.getInstance(this, ALMANAC_DATABASE_NAME);
+		.getInstance(this, ALMANAC_DATABASE_NAME);
 		// OK Dovrei usare aSQLiteDatabaseAdapter.getDatabase(); ma questo crea
 		// problemi nella fase di OnPause quando premo Back cosi' invece non
 		// ottengo errori
@@ -191,12 +190,12 @@ public class AlmanacList extends Activity {
 		current = SaintDBEvent.getByDateAndLang(reportDate, "it", db);
 
 		// Get GPS Location!
-		AlmanacUtility almanac = AlmanacUtility.getInstance();
-		
+		//AlmanacUtility almanac = AlmanacUtility.getInstance();
+
 		//Log.d(TAG, "Lat: " + Double.toString(Almanaclocation.getLatitude()));
 		//Log.d(TAG, "Long: " + Double.toString(Almanaclocation.getLongitude()));
 		// Calcola Sunrise/Sunset
-		//Metto una location di default (in pratica sarà quella che l'utente
+		//Metto una location di default (in pratica sarï¿½ quella che l'utente
 		//sceglie nelle preference)
 		Location location = new Location("41.0", "12.0");
 		SunriseSunsetCalculator calculator = new SunriseSunsetCalculator(
@@ -210,7 +209,7 @@ public class AlmanacList extends Activity {
 		// String dusk = calculator.getOfficialSunsetForDate(cal);
 		Log.d(TAG, "CivilSunrise: " + dawn);
 		Log.d(TAG, "CivilSunset: " + dusk);
-		
+
 		// Calcola il calendario Islamico
 		// Get Hijri Calendar
 		HijriCalendar hijriCalendar = new HijriCalendar(cal.get(Calendar.YEAR),
@@ -218,7 +217,7 @@ public class AlmanacList extends Activity {
 		Log.d(TAG, "Islamic data insert: "+Integer.toString(cal.get(Calendar.YEAR))+","+
 				Integer.toString(cal.get(Calendar.MONTH) + 1)+","+
 				Integer.toString(cal.get(Calendar.DAY_OF_MONTH)));
-        hijriDate = hijriCalendar.getHicriTakvim();
+		hijriDate = hijriCalendar.getHicriTakvim();
 
 		// Create an array of days
 		strDays = getResources().getStringArray(R.array.daysofweek_label);
@@ -229,31 +228,24 @@ public class AlmanacList extends Activity {
 		// Lista degli eventi che la listview visualizzera'
 		ArrayList<Event> eventList = new ArrayList<Event>();
 
-		Event[] events = {
-				new Event(getResources().getString(R.string.todayis_label),
-						strDays[cal.get(Calendar.DAY_OF_WEEK) - 1] + ", "
-								+ cal.get(Calendar.DATE) + " "
-								+ strMonths[cal.get(Calendar.MONTH)] + " "
-								+ nowYearFormatted, R.drawable.clock),
-				new Event(getResources().getString(R.string.stardate_label),
-						m_stardate.toStardateString(), R.drawable.treklogo),
-				new Event(getResources().getString(R.string.islamic_calendar_label),					
-						hijriDate, R.drawable.islamlogo),
-				new Event(current.getSaintName(),
-						current.getSaintDescription(), R.drawable.angel),
-				new Event(getResources().getString(
-						R.string.sunrisesunsite_label), dawn + "," + dusk,
-						R.drawable.sunrise),
-				new Event(getResources().getString(R.string.moonphase_label),
-						getResources().getString(getPhaseText(phaseValue)),
-						IMAGE_LOOKUP[phaseValue])};
+		eventList.add(new Event(getResources().getString(R.string.todayis_label),
+				strDays[cal.get(Calendar.DAY_OF_WEEK) - 1] + ", "
+				+ cal.get(Calendar.DATE) + " "
+				+ strMonths[cal.get(Calendar.MONTH)] + " "
+				+ nowYearFormatted, R.drawable.clock));
+		eventList.add(new Event(getResources().getString(R.string.stardate_label),
+				m_stardate.toStardateString(), R.drawable.treklogo));
+		eventList.add(new Event(getResources().getString(R.string.islamic_calendar_label),					
+				hijriDate, R.drawable.islamlogo));
+		eventList.add(new Event(current.getSaintName(),
+				current.getSaintDescription(), R.drawable.angel));
+		eventList.add(new Event(getResources().getString(
+				R.string.sunrisesunsite_label), dawn + "," + dusk,
+				R.drawable.sunrise));
+		eventList.add(new Event(getResources().getString(R.string.moonphase_label),
+				getResources().getString(getPhaseText(phaseValue)),
+				IMAGE_LOOKUP[phaseValue]));
 
-		// riempimento casuale della lista delle persone
-		// Random r=new Random();
-		for (int i = 0; i < 6; i++) {
-			// eventList.add(events[r.nextInt(events.length)]);
-			eventList.add(events[i]);
-		}
 
 		// Questa e' la lista che rappresenta la sorgente dei dati della
 		// listview
@@ -264,32 +256,32 @@ public class AlmanacList extends Activity {
 			Event p = eventList.get(i);// per ogni evento
 
 			HashMap<String, Object> eventMap = new HashMap<String, Object>();// creiamo
-																				// una
-																				// mappa
-																				// di
-																				// valori
+			// una
+			// mappa
+			// di
+			// valori
 
 			eventMap.put("image", p.getPhotoRes()); // per la chiave image,
-													// inseriamo la risorsa dell
-													// immagine
+			// inseriamo la risorsa dell
+			// immagine
 			eventMap.put("event", p.getEventName()); // per la chiave
-														// event,l'informazine
-														// sul EventName
+			// event,l'informazine
+			// sul EventName
 			eventMap.put("description", p.getDescription());// per la chiave
-															// description,
-															// l'informazione
-															// sul Description
+			// description,
+			// l'informazione
+			// sul Description
 			data.add(eventMap); // aggiungiamo la mappa di valori alla sorgente
-								// dati
+			// dati
 		}
 
 		String[] from = { "image", "event", "description" }; // dai valori
-																// contenuti in
-																// queste chiavi
+		// contenuti in
+		// queste chiavi
 		int[] to = { R.id.eventImage, R.id.eventName, R.id.eventDescription };// agli
-																				// id
-																				// dei
-																				// layout
+		// id
+		// dei
+		// layout
 
 		// Costruzione dell' adapter
 		adapter = new SimpleAdapter(getApplicationContext(),
@@ -299,71 +291,71 @@ public class AlmanacList extends Activity {
 
 		// Utilizzo dell'adapter
 		((ListView) findViewById(R.id.eventListView)).setAdapter(adapter);
-		
+
 		//Esempio modifica dati nell'adapter
 		//data.get(4).put("description", "pippo");
 		//adapter.notifyDataSetChanged();
 	}
-	
+
 	//Metodi per GPS LocationListener
 	private final LocationListener locationListener = new LocationListener() {
 		@Override
 		public void onLocationChanged(android.location.Location location) {
-			
+
 			// Geocode your current location to find an address.
 			String latLongString = "";
-			
+
 			if (location != null) {
-			      lat = location.getLatitude();
-			      lng = location.getLongitude();
-			      latLongString = "Lat:" + lat + "\nLong:" + lng;
-			      Log.d(TAG, latLongString);
-			      //m_latlong = {lat,lng};
-			      // Calcola Sunrise/Sunset
-			      // Location of sunrise/set, as latitude/longitude.
-			      Location Almanaclocation = new Location(Double.toString(lat), Double.toString(lng));
-			      SunriseSunsetCalculator calculator = new SunriseSunsetCalculator(
-			    		  Almanaclocation, cal.getTimeZone().getID());
-			      Log.d(TAG, "TimeZone Correct: " + cal.getTimeZone().getID());
-					
-			      // Calendar date = Calendar.getInstance();
-			      dawn = calculator.getCivilSunriseForDate(cal);
-			      dusk = calculator.getCivilSunsetForDate(cal);
-			      // String dawn = calculator.getOfficialSunriseForDate(cal);
-			      // String dusk = calculator.getOfficialSunsetForDate(cal);
-			      Log.d(TAG, "CivilSunrise: " + dawn);
-			      Log.d(TAG, "CivilSunset: " + dusk); 
-			      
-			      //Modifico con i dati necessari
-			      data.get(4).put("description", dawn + "," + dusk);
-			      adapter.notifyDataSetChanged();
-			      
-			      //Finito di aver acquisito i dati spengo
-			      //il listener in modo da non occupare troppe risorse
-			      locationManager.removeUpdates(locationListener);
-			    } else {
-			      latLongString = "No location found";
-			      Log.d(TAG, latLongString);
-			    }
-			
+				lat = location.getLatitude();
+				lng = location.getLongitude();
+				latLongString = "Lat:" + lat + "\nLong:" + lng;
+				Log.d(TAG, latLongString);
+				//m_latlong = {lat,lng};
+				// Calcola Sunrise/Sunset
+				// Location of sunrise/set, as latitude/longitude.
+				Location Almanaclocation = new Location(Double.toString(lat), Double.toString(lng));
+				SunriseSunsetCalculator calculator = new SunriseSunsetCalculator(
+						Almanaclocation, cal.getTimeZone().getID());
+				Log.d(TAG, "TimeZone Correct: " + cal.getTimeZone().getID());
+
+				// Calendar date = Calendar.getInstance();
+				dawn = calculator.getCivilSunriseForDate(cal);
+				dusk = calculator.getCivilSunsetForDate(cal);
+				// String dawn = calculator.getOfficialSunriseForDate(cal);
+				// String dusk = calculator.getOfficialSunsetForDate(cal);
+				Log.d(TAG, "CivilSunrise: " + dawn);
+				Log.d(TAG, "CivilSunset: " + dusk); 
+
+				//Modifico con i dati necessari
+				data.get(4).put("description", dawn + "," + dusk);
+				adapter.notifyDataSetChanged();
+
+				//Finito di aver acquisito i dati spengo
+				//il listener in modo da non occupare troppe risorse
+				locationManager.removeUpdates(locationListener);
+			} else {
+				latLongString = "No location found";
+				Log.d(TAG, latLongString);
+			}
+
 		}
-	   
+
 		@Override
-        public void onProviderDisabled(String provider)
-        {
-            Toast.makeText( getApplicationContext(), "Gps Disabled", Toast.LENGTH_SHORT ).show();
-        }
- 
-        @Override
-        public void onProviderEnabled(String provider)
-        {
-            Toast.makeText( getApplicationContext(), "Gps Enabled", Toast.LENGTH_SHORT).show();
-        }
- 
-        @Override
-        public void onStatusChanged(String provider, int status, Bundle extras)
-        {
-        }
+		public void onProviderDisabled(String provider)
+		{
+			Toast.makeText( getApplicationContext(), "Gps Disabled", Toast.LENGTH_SHORT ).show();
+		}
+
+		@Override
+		public void onProviderEnabled(String provider)
+		{
+			Toast.makeText( getApplicationContext(), "Gps Enabled", Toast.LENGTH_SHORT).show();
+		}
+
+		@Override
+		public void onStatusChanged(String provider, int status, Bundle extras)
+		{
+		}
 	};	
 
 	// Close db onDestroy
@@ -381,14 +373,14 @@ public class AlmanacList extends Activity {
 		//Close db
 		db.close();
 	}
-	
+
 	@Override 
 	public void onStop() {
-	//	    // Unregister the LocationListener to stop updating the
-	//	    // GUI when the Activity isn't visible.
-	//	    locationManager.removeUpdates(locationListener);
-	    super.onStop();
-	  }
+		//	    // Unregister the LocationListener to stop updating the
+		//	    // GUI when the Activity isn't visible.
+		//	    locationManager.removeUpdates(locationListener);
+		super.onStop();
+	}
 
 	// Function to copy to Clipboard
 	// Funzione per copiare i dati generati nella clipboard
@@ -397,8 +389,8 @@ public class AlmanacList extends Activity {
 
 		strBuffer.append(getResources().getString(R.string.todayis_label));
 		strBuffer.append(" " + strDays[cal.get(Calendar.DAY_OF_WEEK) - 1]
-				+ ", " + cal.get(Calendar.DATE) + " "
-				+ strMonths[cal.get(Calendar.MONTH)] + "\n");
+		                               + ", " + cal.get(Calendar.DATE) + " "
+		                               + strMonths[cal.get(Calendar.MONTH)] + "\n");
 		// " "+nowYearFormatted;
 		strBuffer.append(getResources().getString(R.string.islamic_calendar_label));
 		strBuffer.append(" " + hijriDate + "\n");
@@ -407,7 +399,7 @@ public class AlmanacList extends Activity {
 		strBuffer.append(current.getSaintName() + " "
 				+ current.getSaintDescription() + "\n");
 		strBuffer.append(getResources().getString(
-						R.string.sunrisesunsite_label) + " " + dawn + "," + dusk + "\n");
+				R.string.sunrisesunsite_label) + " " + dawn + "," + dusk + "\n");
 		strBuffer.append(getResources().getString(R.string.moonphase_label)
 				+ " " + getResources().getString(getPhaseText(m_phaseValue)));
 
@@ -456,7 +448,7 @@ public class AlmanacList extends Activity {
 		double term1 = Math.floor(365.25 * (transformedYear + 4712));
 		double term2 = Math.floor(30.6 * transformedMonth + 0.5);
 		double term3 = Math
-				.floor(Math.floor((transformedYear / 100) + 49) * 0.75) - 38;
+		.floor(Math.floor((transformedYear / 100) + 49) * 0.75) - 38;
 
 		double intermediate = term1 + term2 + day + 59;
 		if (intermediate > 2299160) {
@@ -477,16 +469,16 @@ public class AlmanacList extends Activity {
 
 	// Return the right image for Moon Pahse
 	private static final int[] IMAGE_LOOKUP = { R.drawable.moon0,
-			R.drawable.moon1, R.drawable.moon2, R.drawable.moon3,
-			R.drawable.moon4, R.drawable.moon5, R.drawable.moon6,
-			R.drawable.moon7, R.drawable.moon8, R.drawable.moon9,
-			R.drawable.moon10, R.drawable.moon11, R.drawable.moon12,
-			R.drawable.moon13, R.drawable.moon14, R.drawable.moon15,
-			R.drawable.moon16, R.drawable.moon17, R.drawable.moon18,
-			R.drawable.moon19, R.drawable.moon20, R.drawable.moon21,
-			R.drawable.moon22, R.drawable.moon23, R.drawable.moon24,
-			R.drawable.moon25, R.drawable.moon26, R.drawable.moon27,
-			R.drawable.moon28, R.drawable.moon29, };
+		R.drawable.moon1, R.drawable.moon2, R.drawable.moon3,
+		R.drawable.moon4, R.drawable.moon5, R.drawable.moon6,
+		R.drawable.moon7, R.drawable.moon8, R.drawable.moon9,
+		R.drawable.moon10, R.drawable.moon11, R.drawable.moon12,
+		R.drawable.moon13, R.drawable.moon14, R.drawable.moon15,
+		R.drawable.moon16, R.drawable.moon17, R.drawable.moon18,
+		R.drawable.moon19, R.drawable.moon20, R.drawable.moon21,
+		R.drawable.moon22, R.drawable.moon23, R.drawable.moon24,
+		R.drawable.moon25, R.drawable.moon26, R.drawable.moon27,
+		R.drawable.moon28, R.drawable.moon29, };
 
 	private static final int MENUITEM_TODAY_ID = 0;
 	private static final int MENUITEM_CHOOSE_DATE_ID = 1;
