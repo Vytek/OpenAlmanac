@@ -195,7 +195,7 @@ public class AlmanacList extends Activity {
 		//Log.d(TAG, "Lat: " + Double.toString(Almanaclocation.getLatitude()));
 		//Log.d(TAG, "Long: " + Double.toString(Almanaclocation.getLongitude()));
 		// Calcola Sunrise/Sunset
-		//Metto una location di default (in pratica sar� quella che l'utente
+		//Metto una location di default (in pratica sara' quella che l'utente
 		//sceglie nelle preference)
 		Location location = new Location("41.0", "12.0");
 		SunriseSunsetCalculator calculator = new SunriseSunsetCalculator(

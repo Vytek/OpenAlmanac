@@ -24,22 +24,21 @@ import android.util.Log;
 
 public class AlmanacUtility {
 	//
-	private static AlmanacUtility instance = null;
+	private static AlmanacUtility instance = new AlmanacUtility();
 
 	//
-	private AlmanacUtility() {
-		super();
-	}
+	private AlmanacUtility() {}
 
 	//
-	public static final AlmanacUtility getInstance() {
-		if (instance == null) {
-			instance = new AlmanacUtility();
-		}
-		return instance;
+	public static AlmanacUtility getInstance() {
+	      return instance;
+	   }
+	
+	public Object clone() throws CloneNotSupportedException {
+      throw new CloneNotSupportedException();
 	}
 
-	// La scheda SD � presente?
+	// La scheda SD e' presente?
 	/*
 	 * @return boolean return true if the application can access the SDCARD on
 	 * phone
