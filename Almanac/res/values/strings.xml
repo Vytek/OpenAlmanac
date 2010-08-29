@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources> 
     <string name="app_name">Almanac</string>
 	<string name="almanacinfo">Information</string>
 	<string name="almanacevents">Events</string>
@@ -21,9 +21,13 @@
     <string name="choose_date_label">Choose date</string>
     <string name="vocalize_label">Vocalize</string>
     <string name="screenshot_label">Screeshot</string>
+    <string name="options_label">Options</string>
     <string name="copytoclipboard_label">Copy to clipboard</string>
     <string name="copiedtoclipboard_label">Data copied to the clipboard!</string>
     <string name="notyetimplemented_label">Not yet implemented!</string>
+    <string name="longitude_label">Longitude:</string>
+    <string name="latitude_label">Latitude:</string>
+    <string name="preference_label">Almanac Options:</string>
 	<string-array name="daysofweek_label">
 		<item>Sunday</item>
 		<item>Monday</item>

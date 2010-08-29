@@ -22,8 +22,12 @@
     <string name="vocalize_label">Vocalizza</string>
     <string name="screenshot_label">Cattura schermo</string>
     <string name="copytoclipboard_label">Copia in Appunti</string>
+    <string name="options_label">Opzioni</string>
     <string name="copiedtoclipboard_label">Dati copiati negli appunti!</string>
     <string name="notyetimplemented_label">Funzione non ancora realizzata!</string>
+    <string name="longitude_label">Longitudine:</string>
+    <string name="latitude_label">Latitudine:</string>
+    <string name="preference_label">Opzioni di Almanac:</string>
 	<string-array name="daysofweek_label">
 		<item>Domenica</item>
 		<item>Lunedì</item>

@@ -6,6 +6,7 @@ Versione 0.0.16
 - Classe AlmanacUtility sistemato dichiarazione Singleton
 - Cancellazione strutture dati non utili per la visualizzazionr (Grazie JD)
 - Debug Vario e commento/pulizia codice
+- Aggunto un primo abbozzo di gestione delle Preferences
 
 16.40 martedì 24 agosto 2010
 

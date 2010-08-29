@@ -9,6 +9,7 @@ import java.util.HashMap;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
@@ -485,7 +486,8 @@ public class AlmanacList extends Activity {
 	private static final int MENUITEM_MAKE_SCREENSHOT_ID = 2;
 	private static final int MENUITEM_TEXT_TO_SPEECH_ID = 3;
 	private static final int MENUITEM_COPY_TO_CLIPBOARD_ID = 4;
-
+	private static final int MENUITEM_OPTIONS_ID = 5;
+	
 	// Main menu for AlmanList Activity
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -507,6 +509,9 @@ public class AlmanacList extends Activity {
 		item = menu.add(0, MENUITEM_COPY_TO_CLIPBOARD_ID, 0, getResources()
 				.getString(R.string.copytoclipboard_label));
 		item.setIcon(R.drawable.copy);
+		item = menu.add(0, MENUITEM_OPTIONS_ID, 0, getResources()
+				.getString(R.string.options_label));
+		item.setIcon(android.R.drawable.ic_menu_preferences);
 
 		return true;
 	}
@@ -549,7 +554,9 @@ public class AlmanacList extends Activity {
 					getResources().getString(R.string.copiedtoclipboard_label),
 					Toast.LENGTH_SHORT).show();
 			return true;
-
+		case MENUITEM_OPTIONS_ID:
+			startActivity(new Intent(this, AlmanacPreferences.class));
+			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
