@@ -176,7 +176,7 @@ public class AlmanacList extends Activity {
 			db = aSQLiteDatabaseAdapter.getWritableDatabase();
 		}
 
-		Configuration conf = new Configuration();
+		/*Configuration conf = new Configuration();
 		Settings.System.getConfiguration(getContentResolver(), conf);
 		// String strTest = Integer.toString(cal.get(Calendar.DATE))+ "/" +
 		// Integer.toString(cal.get(Calendar.MONTH));
@@ -184,11 +184,14 @@ public class AlmanacList extends Activity {
 
 		Date today = Calendar.getInstance().getTime();
 		String reportDate = df.format(today);
-		Log.d(TAG, reportDate);
-
+		Log.d(TAG, reportDate);*/
+		
+		Log.d(TAG, "Day: " + Integer.toString(cal.get(Calendar.DAY_OF_MONTH)));
+		Log.d(TAG, "Month: " + Integer.toString(cal.get(Calendar.MONTH) + 1));
 		// current=SaintDBEvent.getByDateAndLang(strTest,
 		// conf.locale.getLanguage(), db); //locale
-		current = SaintDBEvent.getByDateAndLang(reportDate, "it", db);
+		current = SaintDBEvent.getByDateAndLang(Integer.toString(cal.get(Calendar.DAY_OF_MONTH)), 
+				Integer.toString(cal.get(Calendar.MONTH) + 1) , "it", db);
 
 		// Get GPS Location!
 		//AlmanacUtility almanac = AlmanacUtility.getInstance();
