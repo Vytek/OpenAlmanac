@@ -2,8 +2,8 @@
 <manifest
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	package="it.almanac"
-	android:versionName="0.0.16"
-	android:versionCode="16"
+	android:versionName="0.0.17"
+	android:versionCode="17"
 	android:installLocation="auto">
 	<application
 		android:debuggable="true"

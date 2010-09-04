@@ -1,3 +1,10 @@
+12.32 sabato 4 settembre 2010
+
+Versione 0.0.17
+
+- Inserito ultima verisione db con 366 Santi in italiano
+- Debug vario
+
 14.51 29/08/2010
 
 Versione 0.0.16
