@@ -28,6 +28,7 @@
     <string name="longitude_label">Longitude:</string>
     <string name="latitude_label">Latitude:</string>
     <string name="preference_label">Almanac Options:</string>
+    <string name="preference_category_label">Default coordinates:</string>
 	<string-array name="daysofweek_label">
 		<item>Sunday</item>
 		<item>Monday</item>

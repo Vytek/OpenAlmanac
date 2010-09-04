@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 
-
 public class AlmanacPreferences extends PreferenceActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
