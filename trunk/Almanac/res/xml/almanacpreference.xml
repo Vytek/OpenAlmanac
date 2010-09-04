@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen
-  xmlns:android="http://schemas.android.com/apk/res/android" android:title="@string/preference_label" android:key="Preference">
-<EditTextPreference android:title="@string/latitude_label" android:key="Latitude" android:defaultValue="41.898416"></EditTextPreference>
-<EditTextPreference android:title="@string/longitude_label" android:key="Longitude" android:defaultValue="12.545145"></EditTextPreference>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" android:title="@string/preference_label" android:key="Preference">
+<PreferenceCategory android:title="@string/preference_category_label">
+	<EditTextPreference android:title="@string/latitude_label"
+	 android:key="Latitude"
+	 android:summary="This allows you to enter a string"
+	 android:defaultValue="41.898416" />
+	<EditTextPreference android:title="@string/longitude_label" 
+	android:key="Longitude"
+	android:summary="This allows you to enter a string" 
+	android:defaultValue="12.545145" />
+</PreferenceCategory>
+<PreferenceCategory android:title="Info" />
+<EditTextPreference android:title="Version"
+	 android:key="Version"
+	 android:summary="This allows you to enter a string"
+	 android:defaultValue="0.0.17" />
 </PreferenceScreen>
+
+

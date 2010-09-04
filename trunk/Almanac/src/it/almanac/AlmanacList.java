@@ -176,16 +176,6 @@ public class AlmanacList extends Activity {
 			db = aSQLiteDatabaseAdapter.getWritableDatabase();
 		}
 
-		/*Configuration conf = new Configuration();
-		Settings.System.getConfiguration(getContentResolver(), conf);
-		// String strTest = Integer.toString(cal.get(Calendar.DATE))+ "/" +
-		// Integer.toString(cal.get(Calendar.MONTH));
-		SimpleDateFormat df = new SimpleDateFormat("dd/MM");
-
-		Date today = Calendar.getInstance().getTime();
-		String reportDate = df.format(today);
-		Log.d(TAG, reportDate);*/
-		
 		Log.d(TAG, "Day: " + Integer.toString(cal.get(Calendar.DAY_OF_MONTH)));
 		Log.d(TAG, "Month: " + Integer.toString(cal.get(Calendar.MONTH) + 1));
 		// current=SaintDBEvent.getByDateAndLang(strTest,
