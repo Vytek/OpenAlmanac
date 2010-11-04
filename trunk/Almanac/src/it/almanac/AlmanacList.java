@@ -70,6 +70,24 @@ public class AlmanacList extends Activity {
 	public boolean getFirstRun() {
 		return mPrefs.getBoolean("firstRun", true);
 	}
+	
+	/**
+	 * get the Latitude Pref 
+	 * 
+	 * @return returns String Latitude Prefs
+	 */
+	public String getLatPrefs(){
+		return mPrefs.getString("Latitude", "0.0");
+	}
+	
+	/**
+	 * get the Longitude Pref 
+	 * 
+	 * @return returns String Latitude Prefs
+	 */
+	public String getLongPrefs(){
+		return mPrefs.getString("Longitude", "0.0");
+	}
 
 	/**
 	 * store the first run
@@ -191,7 +209,7 @@ public class AlmanacList extends Activity {
 		// Calcola Sunrise/Sunset
 		//Metto una location di default (in pratica sara' quella che l'utente
 		//sceglie nelle preference)
-		Location location = new Location("41.0", "12.0");
+		Location location = new Location(getLatPrefs(), getLongPrefs());
 		SunriseSunsetCalculator calculator = new SunriseSunsetCalculator(
 				location, cal.getTimeZone().getID());
 		Log.d(TAG, "TimeZone Correct: " + cal.getTimeZone().getID());
