@@ -3,6 +3,7 @@
 Versione 0.0.19
 
 - Caricamento della Latitudine e della Longitudine da Preference
+- Aggiornato DB Almanac, corretti alcuni refusi ed errori nei nomi dei Santi
 
 20.23 23/09/2010
 
