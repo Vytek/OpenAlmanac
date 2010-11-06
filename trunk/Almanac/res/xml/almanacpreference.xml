@@ -3,11 +3,11 @@
 <PreferenceCategory android:title="@string/preference_category_label">
 	<EditTextPreference android:title="@string/latitude_label"
 	 android:key="Latitude"
-	 android:summary="This allows you to enter a string"
+	 android:summary="@string/preference_latitude_label"
 	 android:defaultValue="41.898416" />
 	<EditTextPreference android:title="@string/longitude_label" 
 	android:key="Longitude"
-	android:summary="This allows you to enter a string" 
+	android:summary="@string/preference_longitude_label" 
 	android:defaultValue="12.545145" />
 </PreferenceCategory>
 <PreferenceCategory android:title="Info"/>

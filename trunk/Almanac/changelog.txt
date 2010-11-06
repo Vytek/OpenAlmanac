@@ -1,3 +1,11 @@
+13.55 06/11/2010
+
+Versione 0.0.20
+
+- Tradotte in italiano ed inglese alcune scritte
+- Implementato pulsante di cambio data per Today/Oggi e Cambio data a scelta
+- Debug vario 
+
 15:57 04/11/2010
 
 Versione 0.0.19

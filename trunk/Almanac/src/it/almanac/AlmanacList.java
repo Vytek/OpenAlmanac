@@ -8,6 +8,8 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -23,6 +25,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
@@ -122,7 +125,109 @@ public class AlmanacList extends Activity {
 
 		return criteria;
 	}
+	
+	/*
+	 * 
+	 */
+	private Calendar getDate() {
+		return cal;
+	}
+	
+	/*
+	 * 
+	 */
+	private void setDate(Calendar date) {
+	    cal = date;
+	    //Aggiorna dati
+	    //Update data
+	    UpdateAllData();
+	}
+	
+	/*
+	 * Update all data in the list
+	 *
+	 * 
+	 * Aggiorna tutti i dati nella lista
+	 * 
+	 */
+	private void UpdateAllData() {
+		
+		// Ricalcola Date
+		// New Date
+		Date date = cal.getTime();
+		SimpleDateFormat formatPattern = new SimpleDateFormat("yyyy");
+		String nowYearFormatted = formatPattern.format(date);
 
+		// Data Stellare 
+		// Star Date (Star Trek)
+		m_stardate = new Stardate();
+		GregorianCalendar gc = new GregorianCalendar();
+		gc.setTime( cal.getTime() );
+		m_stardate.setGregorian(gc);
+		// m_stardate.toString();
+
+		// Calcola Fase Lunare
+		// Compute Moon Phase
+		double phase = computeMoonPhase();
+		Log.i(TAG, "New computed moon phase: " + phase);
+
+		int phaseValue = ((int) Math.floor(phase)) % 30;
+		m_phaseValue = phaseValue;
+		Log.i(TAG, "New discrete phase value: " + phaseValue);
+		
+		//Ricalcola il santo
+		Log.d(TAG, "New day: " + Integer.toString(cal.get(Calendar.DAY_OF_MONTH)));
+		Log.d(TAG, "New month: " + Integer.toString(cal.get(Calendar.MONTH) + 1));
+		// current=SaintDBEvent.getByDateAndLang(strTest,
+		// conf.locale.getLanguage(), db); //locale
+		current = SaintDBEvent.getByDateAndLang(Integer.toString(cal.get(Calendar.DAY_OF_MONTH)), 
+				Integer.toString(cal.get(Calendar.MONTH) + 1) , "it", db);
+		
+		//Ricalcola Sunrise/Sunset
+		//Metto una location di default (in pratica sara' quella che l'utente
+		//sceglie nelle preference)
+		Location location = new Location(getLatPrefs(), getLongPrefs());
+		SunriseSunsetCalculator calculator = new SunriseSunsetCalculator(
+				location, cal.getTimeZone().getID());
+		Log.d(TAG, "TimeZone Correct: " + cal.getTimeZone().getID());
+
+		// Calendar date = Calendar.getInstance();
+		dawn = calculator.getCivilSunriseForDate(cal);
+		dusk = calculator.getCivilSunsetForDate(cal);
+		// String dawn = calculator.getOfficialSunriseForDate(cal);
+		// String dusk = calculator.getOfficialSunsetForDate(cal);
+		Log.d(TAG, "New civilSunrise: " + dawn);
+		Log.d(TAG, "New civilSunset: " + dusk);
+
+		//Ricalcola il calendario Islamico
+		//ReGet Hijri Calendar
+		HijriCalendar hijriCalendar = new HijriCalendar(cal.get(Calendar.YEAR),
+				(cal.get(Calendar.MONTH) + 1),cal.get(Calendar.DATE));
+		Log.d(TAG, "New Islamic data insert: "+Integer.toString(cal.get(Calendar.YEAR))+","+
+				Integer.toString(cal.get(Calendar.MONTH) + 1)+","+
+				Integer.toString(cal.get(Calendar.DAY_OF_MONTH)));
+		hijriDate = hijriCalendar.getHicriTakvim();
+	
+		//Update Data  
+		data.get(0).put("description", strDays[cal.get(Calendar.DAY_OF_WEEK) - 1] + ", "
+				+ cal.get(Calendar.DATE) + " "
+				+ strMonths[cal.get(Calendar.MONTH)] + " "
+				+ nowYearFormatted);
+		//Update Star Date
+		data.get(1).put("description", m_stardate.toStardateString());
+		//Update Hijri Calendar
+		data.get(2).put("description", hijriDate);
+		//Update Saint of Day
+		data.get(3).put("event", current.getSaintName());
+		data.get(3).put("description", current.getSaintDescription());
+		//Update Sunrise & Sunsite
+		data.get(4).put("description", dawn + "," + dusk);
+		//Update Moon Phase
+		data.get(5).put("description", getResources().getString(getPhaseText(phaseValue)));
+		data.get(5).put("image", IMAGE_LOOKUP[phaseValue]);
+		adapter.notifyDataSetChanged();
+	}
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);	
@@ -499,6 +604,43 @@ public class AlmanacList extends Activity {
 	private static final int MENUITEM_COPY_TO_CLIPBOARD_ID = 4;
 	private static final int MENUITEM_OPTIONS_ID = 5;
 	
+	private static final int DATE_DIALOG_ID = 1;
+
+	@Override
+	protected Dialog onCreateDialog(int id) {
+	  switch (id) {
+	      case DATE_DIALOG_ID:
+	        Calendar date = getDate();
+	        return new DatePickerDialog(this,
+	            mDateSetListener,
+	            date.get(Calendar.YEAR),
+	            date.get(Calendar.MONTH),
+	            date.get(Calendar.DAY_OF_MONTH));
+	   }    
+	   return null;
+	 }
+
+	 @Override
+	 protected void onPrepareDialog(int id, Dialog dialog) {
+	    switch (id) {
+	      case DATE_DIALOG_ID:
+	        Calendar date = getDate();
+	        ((DatePickerDialog) dialog).updateDate(date.get(Calendar.YEAR),
+	            date.get(Calendar.MONTH),
+	            date.get(Calendar.DAY_OF_MONTH));
+	        break;
+	    }
+	 }     
+	 
+	 private DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+	      public void onDateSet(DatePicker view, int year, int monthOfYear,
+	          int dayOfMonth) {
+	        Calendar date = Calendar.getInstance();
+	        date.set(year, monthOfYear, dayOfMonth);
+	        setDate(date);
+	    }
+	 };
+	
 	// Main menu for AlmanList Activity
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -538,14 +680,20 @@ public class AlmanacList extends Activity {
 
 		switch (item.getItemId()) {
 		case MENUITEM_TODAY_ID:
+			/*
 			Toast.makeText(this,
 					getResources().getString(R.string.notyetimplemented_label),
 					Toast.LENGTH_SHORT).show();
+			*/
+			setDate(Calendar.getInstance());
 			return true;
 		case MENUITEM_CHOOSE_DATE_ID:
+			/*
 			Toast.makeText(this,
 					getResources().getString(R.string.notyetimplemented_label),
 					Toast.LENGTH_SHORT).show();
+			*/
+			showDialog(DATE_DIALOG_ID);
 			return true;
 		case MENUITEM_MAKE_SCREENSHOT_ID:
 			view = (ListView) findViewById(R.id.eventListView);

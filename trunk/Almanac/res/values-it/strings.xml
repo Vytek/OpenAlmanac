@@ -29,6 +29,8 @@
     <string name="latitude_label">Latitudine:</string>
     <string name="preference_label">Opzioni di Almanac:</string>
     <string name="preference_category_label">Coordinate di default:</string>
+    <string name="preference_longitude_label">Inserire longitudine di partenza</string>
+    <string name="preference_latitude_label">Inserire latitudine di partenza</string>
 	<string-array name="daysofweek_label">
 		<item>Domenica</item>
 		<item>Lunedì</item>
