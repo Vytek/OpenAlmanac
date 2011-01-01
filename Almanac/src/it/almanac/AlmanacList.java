@@ -180,8 +180,11 @@ public class AlmanacList extends Activity {
 		Log.d(TAG, "New month: " + Integer.toString(cal.get(Calendar.MONTH) + 1));
 		// current=SaintDBEvent.getByDateAndLang(strTest,
 		// conf.locale.getLanguage(), db); //locale
-		current = SaintDBEvent.getByDateAndLang(Integer.toString(cal.get(Calendar.DAY_OF_MONTH)), 
-				Integer.toString(cal.get(Calendar.MONTH) + 1) , "it", db);
+		if (db.isOpen())
+		{
+			current = SaintDBEvent.getByDateAndLang(Integer.toString(cal.get(Calendar.DAY_OF_MONTH)), 
+					Integer.toString(cal.get(Calendar.MONTH) + 1) , "it", db);
+		}
 		
 		//Ricalcola Sunrise/Sunset
 		//Metto una location di default (in pratica sara' quella che l'utente
@@ -487,8 +490,8 @@ public class AlmanacList extends Activity {
 	@Override
 	public void onPause() {
 		super.onPause();
-		//Close db
-		db.close();
+		//Close db NO on Pause!
+		//db.close();
 	}
 
 	@Override 
