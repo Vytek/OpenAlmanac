@@ -6,7 +6,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
-
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -93,6 +92,15 @@ public class AlmanacList extends Activity {
 	}
 	
 	/**
+	 * store the first run
+	 */
+	public void setRunned() {
+		SharedPreferences.Editor edit = mPrefs.edit();
+		edit.putBoolean("firstRun", false);
+		edit.commit();
+	}
+	
+	/*
 	 * Store Lat & Long Preferences 
 	 */
 	public void setLatLongPrefs(String Lat, String Long)
@@ -100,15 +108,6 @@ public class AlmanacList extends Activity {
 		SharedPreferences.Editor edit = mPrefs.edit();
 		edit.putString("Latitude", Lat);
 		edit.putString("Longitude", Long);
-		edit.commit();
-	}
-
-	/**
-	 * store the first run
-	 */
-	public void setRunned() {
-		SharedPreferences.Editor edit = mPrefs.edit();
-		edit.putBoolean("firstRun", false);
 		edit.commit();
 	}
 
@@ -133,7 +132,7 @@ public class AlmanacList extends Activity {
 		criteria.setCostAllowed(false);
 		criteria.setPowerRequirement(Criteria.POWER_LOW);
 		criteria.setSpeedRequired(false);
-
+		//
 		return criteria;
 	}
 	
@@ -208,10 +207,10 @@ public class AlmanacList extends Activity {
 		// Calendar date = Calendar.getInstance();
 		dawn = calculator.getCivilSunriseForDate(cal);
 		dusk = calculator.getCivilSunsetForDate(cal);
-		// String dawn = calculator.getOfficialSunriseForDate(cal);
-		// String dusk = calculator.getOfficialSunsetForDate(cal);
-		Log.d(TAG, "New civilSunrise: " + dawn);
-		Log.d(TAG, "New civilSunset: " + dusk);
+		String dawn = calculator.getOfficialSunriseForDate(cal);
+		String dusk = calculator.getOfficialSunsetForDate(cal);
+		Log.d(TAG, "New OfficialcivilSunrise: " + dawn);
+		Log.d(TAG, "New OfficialcivilSunset: " + dusk);
 
 		//Ricalcola il calendario Islamico
 		//ReGet Hijri Calendar
@@ -336,18 +335,19 @@ public class AlmanacList extends Activity {
 		// Calendar date = Calendar.getInstance();
 		dawn = calculator.getCivilSunriseForDate(cal);
 		dusk = calculator.getCivilSunsetForDate(cal);
-		// String dawn = calculator.getOfficialSunriseForDate(cal);
-		// String dusk = calculator.getOfficialSunsetForDate(cal);
-		Log.d(TAG, "CivilSunrise: " + dawn);
-		Log.d(TAG, "CivilSunset: " + dusk);
+		String dawn = calculator.getOfficialSunriseForDate(cal);
+		String dusk = calculator.getOfficialSunsetForDate(cal);
+		Log.d(TAG, "OfficialCivilSunrise: " + dawn);
+		Log.d(TAG, "OfficialCivilSunset: " + dusk);
 
 		// Calcola il calendario Islamico
 		// Get Hijri Calendar
 		HijriCalendar hijriCalendar = new HijriCalendar(cal.get(Calendar.YEAR),
-				(cal.get(Calendar.MONTH) + 1),cal.get(Calendar.DATE));
+				(cal.get(Calendar.MONTH) + 1),cal.get(Calendar.DAY_OF_MONTH));
 		Log.d(TAG, "Islamic data insert: "+Integer.toString(cal.get(Calendar.YEAR))+","+
 				Integer.toString(cal.get(Calendar.MONTH) + 1)+","+
 				Integer.toString(cal.get(Calendar.DAY_OF_MONTH)));
+		Log.d(TAG, "Islamic data converted: "+hijriCalendar.getHijriDay()+","+hijriCalendar.getHijriMonthName()+","+hijriCalendar.getHijriYear());
 		hijriDate = hijriCalendar.getHicriTakvim();
 
 		// Create an array of days
@@ -439,7 +439,7 @@ public class AlmanacList extends Activity {
 			if (location != null) {
 				lat = location.getLatitude();
 				lng = location.getLongitude();
-				latLongString = "Lat:" + lat + "\nLong:" + lng;
+				latLongString = "Lat:" + Double.toString(lat) + "\nLong:" + Double.toString(lng);
 				Log.d(TAG, latLongString);
 				//m_latlong = {lat,lng};
 				// Calcola Sunrise/Sunset
@@ -452,14 +452,18 @@ public class AlmanacList extends Activity {
 				// Calendar date = Calendar.getInstance();
 				dawn = calculator.getCivilSunriseForDate(cal);
 				dusk = calculator.getCivilSunsetForDate(cal);
-				// String dawn = calculator.getOfficialSunriseForDate(cal);
-				// String dusk = calculator.getOfficialSunsetForDate(cal);
-				Log.d(TAG, "CivilSunrise: " + dawn);
-				Log.d(TAG, "CivilSunset: " + dusk); 
+				String dawn = calculator.getOfficialSunriseForDate(cal);
+				String dusk = calculator.getOfficialSunsetForDate(cal);
+				Log.d(TAG, "OfficialCivilSunrise: " + dawn);
+				Log.d(TAG, "OfficialCivilSunset: " + dusk); 
 
 				//Modifico con i dati necessari
 				data.get(4).put("description", dawn + "," + dusk);
 				adapter.notifyDataSetChanged();
+				
+				//Save Lat and Long in Prefs
+				//Salvo i dati nelle Preference
+				setLatLongPrefs(Double.toString(lng),Double.toString(lng));
 
 				//Finito di aver acquisito i dati spengo
 				//il listener in modo da non occupare troppe risorse
@@ -501,8 +505,9 @@ public class AlmanacList extends Activity {
 	@Override
 	public void onPause() {
 		super.onPause();
-		//Close db NO on Pause!
+		//Close db
 		//db.close();
+		//Non chiudere db altrimenti errore quando cambio Activity
 	}
 
 	@Override 
