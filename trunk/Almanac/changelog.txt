@@ -1,3 +1,19 @@
+13.39 01/01/2011
+
+Versione 0.0.22
+
+- Settaggio Lat e Long con fix fatto da GPS in modo da avere in default sempre ultima locazione corretta
+- Inizio funzione per calcolo calendario Maya
+- TO DO: Calcolo festività mobili  ;-)
+- Debug vario
+
+14:20 22/11/2010
+
+Versione 0.0.21
+
+- Nuovo aggiornato DB Almanac, corretti alcuni refusi ed errori nei nomi dei Santi 
+- Possibile correzione errore lattura DB quando cambio Activity ed invoco OnPause
+
 13.55 06/11/2010
 
 Versione 0.0.20

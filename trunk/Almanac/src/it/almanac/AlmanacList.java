@@ -91,6 +91,17 @@ public class AlmanacList extends Activity {
 	public String getLongPrefs(){
 		return mPrefs.getString("Longitude", "0.0");
 	}
+	
+	/**
+	 * Store Lat & Long Preferences 
+	 */
+	public void setLatLongPrefs(String Lat, String Long)
+	{
+		SharedPreferences.Editor edit = mPrefs.edit();
+		edit.putString("Latitude", Lat);
+		edit.putString("Longitude", Long);
+		edit.commit();
+	}
 
 	/**
 	 * store the first run
