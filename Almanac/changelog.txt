@@ -1,3 +1,14 @@
+22.53 venerdì 21 gennaio 2011
+
+Versione 0.0.23
+
+- Nuovo algoritmo phase lunare (test)
+
+22.28 16/01/2011
+
+- android:scaleType="fitXY" su splashscreen
+- corretto errore su DB
+
 17:13 04/01/2011
 
 Versione 0.0.22

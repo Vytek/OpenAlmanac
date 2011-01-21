@@ -44,7 +44,7 @@ public class AlmanacList extends Activity {
 	private SQLiteDatabase db;
 	private SaintDBEvent current;
 	private Stardate m_stardate = null;
-	private int m_phaseValue;
+	private double m_phaseValue;
 	private String[] strDays = null;
 	private String[] strMonths = null;
 	private String dawn = null;
@@ -176,14 +176,13 @@ public class AlmanacList extends Activity {
 		m_stardate.setGregorian(gc);
 		// m_stardate.toString();
 
-		// Calcola Fase Lunare
-		// Compute Moon Phase
-		double phase = computeMoonPhase();
-		Log.i(TAG, "New computed moon phase: " + phase);
+		double phase = AlmanacPhaseOfMoon.MoonPhase(cal.getTimeInMillis());
+		Log.i(TAG, "New computed moon phase: " + phase);		
 
-		int phaseValue = ((int) Math.floor(phase)) % 30;
-		m_phaseValue = phaseValue;
-		Log.i(TAG, "New discrete phase value: " + phaseValue);
+		//int phaseValue = ((int) Math.floor(phase)) % 30;
+		m_phaseValue = phase;
+		int NumberPhase = (int)(Math.toDegrees(phase)/12);
+		//Log.i(TAG, "Discrete phase value: " + phaseValue);
 		
 		//Ricalcola il santo
 		Log.d(TAG, "New day: " + Integer.toString(cal.get(Calendar.DAY_OF_MONTH)));
@@ -236,8 +235,8 @@ public class AlmanacList extends Activity {
 		//Update Sunrise & Sunsite
 		data.get(4).put("description", dawn + "," + dusk);
 		//Update Moon Phase
-		data.get(5).put("description", getResources().getString(getPhaseText(phaseValue)));
-		data.get(5).put("image", IMAGE_LOOKUP[phaseValue]);
+		data.get(5).put("description", getResources().getString(getPhaseText(m_phaseValue)));
+		data.get(5).put("image", IMAGE_LOOKUP[NumberPhase]);
 		adapter.notifyDataSetChanged();
 	}
 	
@@ -288,12 +287,18 @@ public class AlmanacList extends Activity {
 
 		// Calcola Fase Lunare
 		// Compute Moon Phase
-		double phase = computeMoonPhase();
-		Log.i(TAG, "Computed moon phase: " + phase);
+		//double phase = computeMoonPhase();
+		//Log.i(TAG, "Computed moon phase: " + phase);
+		
+		//Nuovo calcolo fase lunare
+		// New compute Moon Phase
+		double phase = AlmanacPhaseOfMoon.MoonPhase(cal.getTimeInMillis());
+		Log.i(TAG, "New computed moon phase: " + phase);		
 
-		int phaseValue = ((int) Math.floor(phase)) % 30;
-		m_phaseValue = phaseValue;
-		Log.i(TAG, "Discrete phase value: " + phaseValue);
+		//int phaseValue = ((int) Math.floor(phase)) % 30;
+		m_phaseValue = phase;
+		int NumberPhase = (int)(Math.toDegrees(phase)/12);
+		//Log.i(TAG, "Discrete phase value: " + phaseValue);
 
 		// Almanac for Saints
 		AlmanacSQLiteDatabaseAdapter aSQLiteDatabaseAdapter = AlmanacSQLiteDatabaseAdapter
@@ -374,8 +379,8 @@ public class AlmanacList extends Activity {
 				R.string.sunrisesunsite_label), dawn + "," + dusk,
 				R.drawable.sunrise));
 		eventList.add(new Event(getResources().getString(R.string.moonphase_label),
-				getResources().getString(getPhaseText(phaseValue)),
-				IMAGE_LOOKUP[phaseValue]));
+				getResources().getString(getPhaseText(m_phaseValue)),
+				IMAGE_LOOKUP[NumberPhase]));
 
 
 		// Questa e' la lista che rappresenta la sorgente dei dati della
@@ -542,20 +547,20 @@ public class AlmanacList extends Activity {
 		return strBuffer.toString();
 	}
 
-	private int getPhaseText(int phaseValue) {
+	private int getPhaseText(double phaseValue) {
 		if (phaseValue == 0) {
 			return R.string.new_moon;
-		} else if (phaseValue > 0 && phaseValue < 7) {
+		} else if (phaseValue > 0 && phaseValue < (Math.PI/2)) {
 			return R.string.waxing_crescent;
-		} else if (phaseValue == 7) {
+		} else if (phaseValue == (Math.PI/2)) {
 			return R.string.first_quarter;
-		} else if (phaseValue > 7 && phaseValue < 15) {
+		} else if (phaseValue > (Math.PI/2) && phaseValue < Math.PI) {
 			return R.string.waxing_gibbous;
-		} else if (phaseValue == 15) {
+		} else if (phaseValue == Math.PI) {
 			return R.string.full_moon;
-		} else if (phaseValue > 15 && phaseValue < 23) {
+		} else if (phaseValue > Math.PI && phaseValue < ((3*Math.PI)/2)) {
 			return R.string.waning_gibbous;
-		} else if (phaseValue == 23) {
+		} else if (phaseValue == ((3*Math.PI)/2)) {
 			return R.string.third_quarter;
 		} else {
 			return R.string.waning_crescent;
