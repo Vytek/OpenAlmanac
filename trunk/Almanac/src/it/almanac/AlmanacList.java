@@ -45,6 +45,8 @@ public class AlmanacList extends Activity {
 	private SaintDBEvent current;
 	private Stardate m_stardate = null;
 	private double m_phaseValue;
+	private int percent;
+	private boolean ww;
 	private String[] strDays = null;
 	private String[] strMonths = null;
 	private String dawn = null;
@@ -57,8 +59,7 @@ public class AlmanacList extends Activity {
 	private static final String TAG = "AlmanacList";
 	private static final String ALMANAC_DATABASE_NAME = "almanac.db";
 	//	private static final String ALMANAC_DATABASE_TABLE = "Saints";
-	private static final double MOON_PHASE_LENGTH = 29.530588853;
-
+	
 	private LocationManager locationManager;
 	private final static long MIN_TIME = 10 * 60000; //10 minuti
 	private final static float MIN_DIST = 1000; //1000 metri
@@ -181,6 +182,9 @@ public class AlmanacList extends Activity {
 
 		//int phaseValue = ((int) Math.floor(phase)) % 30;
 		m_phaseValue = phase;
+		percent = (int)(50.0 * (1.0 - Math.cos(phase)) + 0.5);
+        //String ww = (phase < Math.PI) ? "(waxing)" : "(waning)";
+		ww = (phase < Math.PI) ? true : false;
 		int NumberPhase = (int)(Math.toDegrees(phase)/12);
 		//Log.i(TAG, "Discrete phase value: " + phaseValue);
 		
@@ -235,7 +239,7 @@ public class AlmanacList extends Activity {
 		//Update Sunrise & Sunsite
 		data.get(4).put("description", dawn + "," + dusk);
 		//Update Moon Phase
-		data.get(5).put("description", getResources().getString(getPhaseText(m_phaseValue)));
+		data.get(5).put("description", getResources().getString(getPhaseText(percent, ww)));
 		data.get(5).put("image", IMAGE_LOOKUP[NumberPhase]);
 		adapter.notifyDataSetChanged();
 	}
@@ -297,6 +301,9 @@ public class AlmanacList extends Activity {
 
 		//int phaseValue = ((int) Math.floor(phase)) % 30;
 		m_phaseValue = phase;
+		percent = (int)(50.0 * (1.0 - Math.cos(phase)) + 0.5);
+        //String ww = (phase < Math.PI) ? "(waxing)" : "(waning)";
+		ww = (phase < Math.PI) ? true : false;
 		int NumberPhase = (int)(Math.toDegrees(phase)/12);
 		//Log.i(TAG, "Discrete phase value: " + phaseValue);
 
@@ -379,7 +386,7 @@ public class AlmanacList extends Activity {
 				R.string.sunrisesunsite_label), dawn + "," + dusk,
 				R.drawable.sunrise));
 		eventList.add(new Event(getResources().getString(R.string.moonphase_label),
-				getResources().getString(getPhaseText(m_phaseValue)),
+				getResources().getString(getPhaseText(percent, ww)),
 				IMAGE_LOOKUP[NumberPhase]));
 
 
@@ -542,70 +549,29 @@ public class AlmanacList extends Activity {
 		strBuffer.append(getResources().getString(
 				R.string.sunrisesunsite_label) + " " + dawn + "," + dusk + "\n");
 		strBuffer.append(getResources().getString(R.string.moonphase_label)
-				+ " " + getResources().getString(getPhaseText(m_phaseValue)));
+				+ " " + getResources().getString(getPhaseText(percent, ww)));
 
 		return strBuffer.toString();
 	}
 
-	private int getPhaseText(double phaseValue) {
-		if (phaseValue == 0) {
+	private int getPhaseText(int perceValue, boolean ww) {
+		if (perceValue == 0) {
 			return R.string.new_moon;
-		} else if (phaseValue > 0 && phaseValue < (Math.PI/2)) {
+		} else if (perceValue > 0 && perceValue < 50 && ww == true) {
 			return R.string.waxing_crescent;
-		} else if (phaseValue == (Math.PI/2)) {
+		} else if ((perceValue == 50) && (ww == true)) {
 			return R.string.first_quarter;
-		} else if (phaseValue > (Math.PI/2) && phaseValue < Math.PI) {
+		} else if ((perceValue > 50) && (perceValue < 100) && (ww == true)) {
 			return R.string.waxing_gibbous;
-		} else if (phaseValue == Math.PI) {
+		} else if (perceValue == 100) {
 			return R.string.full_moon;
-		} else if (phaseValue > Math.PI && phaseValue < ((3*Math.PI)/2)) {
+		} else if ((perceValue > 50) && (perceValue < 100) && (ww == false)) {
 			return R.string.waning_gibbous;
-		} else if (phaseValue == ((3*Math.PI)/2)) {
+		} else if ((perceValue == 50) && (ww == false)) {
 			return R.string.third_quarter;
 		} else {
 			return R.string.waning_crescent;
 		}
-	}
-
-	// Computes moon phase based upon Bradley E. Schaefer's moon phase
-	// algorithm.
-	private double computeMoonPhase() {
-		int year = cal.get(Calendar.YEAR);
-		int month = cal.get(Calendar.MONTH) + 1;
-		int day = cal.get(Calendar.DAY_OF_MONTH);
-
-		// Convert the year into the format expected by the algorithm.
-		double transformedYear = year - Math.floor((12 - month) / 10);
-		Log.i(TAG, "transformedYear: " + transformedYear);
-
-		// Convert the month into the format expected by the algorithm.
-		int transformedMonth = month + 9;
-		if (transformedMonth >= 12) {
-			transformedMonth = transformedMonth - 12;
-		}
-		Log.i(TAG, "transformedMonth: " + transformedMonth);
-
-		// Logic to compute moon phase as a fraction between 0 and 1
-		double term1 = Math.floor(365.25 * (transformedYear + 4712));
-		double term2 = Math.floor(30.6 * transformedMonth + 0.5);
-		double term3 = Math
-		.floor(Math.floor((transformedYear / 100) + 49) * 0.75) - 38;
-
-		double intermediate = term1 + term2 + day + 59;
-		if (intermediate > 2299160) {
-			intermediate = intermediate - term3;
-		}
-		Log.i(TAG, "intermediate: " + intermediate);
-
-		double normalizedPhase = (intermediate - 2451550.1) / MOON_PHASE_LENGTH;
-		normalizedPhase = normalizedPhase - Math.floor(normalizedPhase);
-		if (normalizedPhase < 0) {
-			normalizedPhase = normalizedPhase + 1;
-		}
-		Log.i(TAG, "normalizedPhase: " + normalizedPhase);
-
-		// Return the result as a value between 0 and MOON_PHASE_LENGTH
-		return normalizedPhase * MOON_PHASE_LENGTH;
 	}
 
 	// Return the right image for Moon Pahse
