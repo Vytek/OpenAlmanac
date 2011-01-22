@@ -20,7 +20,6 @@
 
 package it.almanac;
 
-
 /** Static methods of this class do the basic maths.
  *  Note you cannot instantiate this class: it is like java.lang.Math.<p>
  *  The calculations follow closely the methods given in the book
