@@ -149,6 +149,8 @@ public class AlmanacList extends Activity {
 	 */
 	private void setDate(Calendar date) {
 	    cal = date;
+	    Date dateInput = cal.getTime();
+	    Log.d(TAG, "New date: " + dateInput);
 	    //Aggiorna dati
 	    //Update data
 	    UpdateAllData();
@@ -302,7 +304,7 @@ public class AlmanacList extends Activity {
 		//int phaseValue = ((int) Math.floor(phase)) % 30;
 		m_phaseValue = phase;
 		percent = (int)(50.0 * (1.0 - Math.cos(phase)) + 0.5);
-        //String ww = (phase < Math.PI) ? "(waxing)" : "(waning)";
+		//String ww = (phase < Math.PI) ? "(waxing)" : "(waning)";
 		ww = (phase < Math.PI) ? true : false;
 		int NumberPhase = (int)(Math.toDegrees(phase)/12);
 		//Log.i(TAG, "Discrete phase value: " + phaseValue);
@@ -574,7 +576,7 @@ public class AlmanacList extends Activity {
 		}
 	}
 
-	// Return the right image for Moon Pahse
+	// Return the right image for Moon Phase
 	private static final int[] IMAGE_LOOKUP = { R.drawable.moon0,
 		R.drawable.moon1, R.drawable.moon2, R.drawable.moon3,
 		R.drawable.moon4, R.drawable.moon5, R.drawable.moon6,
