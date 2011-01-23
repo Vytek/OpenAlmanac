@@ -37,6 +37,7 @@ import it.almanac.R;
 import com.luckycatlabs.sunrisesunset.dto.Location;
 import com.luckycatlabs.sunrisesunset.SunriseSunsetCalculator;
 import astroLib.HijriCalendar;
+import org.jscience.history.calendars.*;
 
 public class AlmanacList extends Activity {
 
@@ -44,6 +45,7 @@ public class AlmanacList extends Activity {
 	private SQLiteDatabase db;
 	private SaintDBEvent current;
 	private Stardate m_stardate = null;
+	private MayanCalendar instance;
 	private double m_phaseValue;
 	private int percent;
 	private boolean ww;
@@ -225,6 +227,14 @@ public class AlmanacList extends Activity {
 				Integer.toString(cal.get(Calendar.MONTH) + 1)+","+
 				Integer.toString(cal.get(Calendar.DAY_OF_MONTH)));
 		hijriDate = hijriCalendar.getHicriTakvim();
+		
+		//Calcola il calendario Mayan
+		//Get Mayan Calendar
+		org.jscience.history.calendars.GregorianCalendar calendar = 
+		new org.jscience.history.calendars.GregorianCalendar(cal.get(Calendar.MONTH) + 1,
+				cal.get(Calendar.DAY_OF_MONTH),cal.get(Calendar.YEAR));
+		instance = new MayanCalendar(calendar);
+		instance.toRD();
 	
 		//Update Data  
 		data.get(0).put("description", strDays[cal.get(Calendar.DAY_OF_WEEK) - 1] + ", "
@@ -243,6 +253,8 @@ public class AlmanacList extends Activity {
 		//Update Moon Phase
 		data.get(5).put("description", getResources().getString(getPhaseText(percent, ww)));
 		data.get(5).put("image", IMAGE_LOOKUP[NumberPhase]);
+		//Update Mayan Calendar
+		data.get(6).put("description", instance.toString());
 		adapter.notifyDataSetChanged();
 	}
 	
@@ -363,6 +375,14 @@ public class AlmanacList extends Activity {
 				Integer.toString(cal.get(Calendar.DAY_OF_MONTH)));
 		Log.d(TAG, "Islamic data converted: "+hijriCalendar.getHijriDay()+","+hijriCalendar.getHijriMonthName()+","+hijriCalendar.getHijriYear());
 		hijriDate = hijriCalendar.getHicriTakvim();
+		
+		//Calcola il calendario Mayan
+		//Get Mayan Calendar
+		org.jscience.history.calendars.GregorianCalendar calendar = 
+		new org.jscience.history.calendars.GregorianCalendar(cal.get(Calendar.MONTH) + 1,
+				cal.get(Calendar.DAY_OF_MONTH),cal.get(Calendar.YEAR));
+		instance = new MayanCalendar(calendar);
+		instance.toRD();
 
 		// Create an array of days
 		strDays = getResources().getStringArray(R.array.daysofweek_label);
@@ -390,7 +410,9 @@ public class AlmanacList extends Activity {
 		eventList.add(new Event(getResources().getString(R.string.moonphase_label),
 				getResources().getString(getPhaseText(percent, ww)),
 				IMAGE_LOOKUP[NumberPhase]));
-
+		eventList.add(new Event(getResources().getString(R.string.mayan_calendar_label),
+				instance.toString(),
+				R.drawable.mayancalendar));
 
 		// Questa e' la lista che rappresenta la sorgente dei dati della
 		// listview
@@ -551,7 +573,9 @@ public class AlmanacList extends Activity {
 		strBuffer.append(getResources().getString(
 				R.string.sunrisesunsite_label) + " " + dawn + "," + dusk + "\n");
 		strBuffer.append(getResources().getString(R.string.moonphase_label)
-				+ " " + getResources().getString(getPhaseText(percent, ww)));
+				+ " " + getResources().getString(getPhaseText(percent, ww)) + "\n");
+		strBuffer.append(getResources().getString(R.string.mayan_calendar_label)
+				+ " " + instance.toString());
 
 		return strBuffer.toString();
 	}

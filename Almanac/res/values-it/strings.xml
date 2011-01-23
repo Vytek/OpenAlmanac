@@ -6,6 +6,7 @@
 	<string name="todayis_label">Oggi è:</string>
 	<string name="stardate_label">Data Stellare:</string>
 	<string name="islamic_calendar_label">Calendario Islamico:</string>
+	<string name="mayan_calendar_label">Calendario Maya:</string>
 	<string name="saintofday_label">Santo del giorno:</string>
 	<string name="sunrisesunsite_label">Il sole sorge/tramonta:</string>
 	<string name="moonphase_label">Fase lunare:</string>
