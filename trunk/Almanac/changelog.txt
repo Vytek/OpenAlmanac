@@ -1,3 +1,9 @@
+12.48 domenica 23 gennaio 2011
+
+Versione 0.0.24
+
+- Modificato per nuova versione
+
 18.12 22/01/2011
 
 - Aggiunto evento OnTouch su SplashScreen
