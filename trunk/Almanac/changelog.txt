@@ -1,3 +1,11 @@
+18.12 22/01/2011
+
+- Aggiunto evento OnTouch su SplashScreen
+- Aggiunto calendario Maya (Funzionante e verificato con
+  http://www.pauahtun.org/Calendar/tools.html)
+- Codice ripulito e modificato
+- Debug vario
+
 13.35 sabato 22 gennaio 2011
 
 - Pulizia codice algoritmo Fase della luna

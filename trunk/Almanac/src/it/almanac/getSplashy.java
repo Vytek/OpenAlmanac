@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.os.Bundle;
 import android.content.Intent;
+import android.view.MotionEvent;
 
 public class getSplashy extends Activity {
 	/** Called when the activity is first created. */
@@ -44,7 +45,7 @@ public class getSplashy extends Activity {
 				} catch (Exception e) {
 					// Thread exception
 					// System.out.println(e.toString());
-					Log.e("Almanac: Splash", e.toString());
+					Log.e("Almanac:Splash", e.toString());
 				} finally {
 					finish();
 				}
@@ -82,5 +83,12 @@ public class getSplashy extends Activity {
 		m_bSplashActive = false;
 		return true;
 	}
-
+	
+	//When you touch the screen, clear the Splash Screen
+	public boolean onTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+        	m_bSplashActive = false;
+        }
+        return true;
+    }
 }
