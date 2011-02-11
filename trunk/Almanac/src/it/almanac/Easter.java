@@ -17,6 +17,7 @@
  * along with EasterJ2ME; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+
 package it.almanac;
 
 import java.util.Calendar;
@@ -63,7 +64,7 @@ import java.util.Date;
  * 
  * d = (19 x 12 + 24) mod 30 = 12 e = (2 x 3 + 4 x 5 + 6 x 12 + 5) mod 7 = 5
  * 
- * Siccome d + e = 12 + 5 = 17 > 10, allora nel 2007 Pasqua cadr� il (12 + 5 -
+ * Siccome d + e = 12 + 5 = 17 > 10, allora nel 2007 Pasqua cadra' il (12 + 5 -
  * 9) = 8 aprile.
  * 
  * @author Marco Ratto
