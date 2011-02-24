@@ -26,9 +26,9 @@ import java.util.Date;
 /**
  * 
  * Questo algoritmo, sviluppato dal matematico tedesco Carl Friedrich Gauss,
- * dï¿½ direttamente la data della Pasqua. L'anno di cui si calcola la Pasqua
- * sia contrassegnato da Y; mod ï¿½ l'operatore modulo che restituisce il resto
- * della divisione fra numeri interi (ad esempio, 13 mod 5 = 3 perchï¿½ 13
+ * e fornisce direttamente la data della Pasqua. L'anno di cui si calcola la Pasqua
+ * sia contrassegnato da Y; mod è l'operatore modulo che restituisce il resto
+ * della divisione fra numeri interi (ad esempio, 13 mod 5 = 3 perchè 13
  * diviso 5 fa 2 con resto 3).
  * 
  * Si calcolano dapprima a, b e c nel seguente modo:
@@ -47,7 +47,7 @@ import java.util.Date;
  * 2100-2199 24 6 2200-2299 25 0 2300-2399 26 1 2400-2499 25 1
  * 
  * Se d + e < 10, allora la Pasqua cade il giorno (d + e + 22) del mese di
- * marzo, altrimenti si verificherï¿½ il (d + e - 9)-esimo giorno del mese di
+ * marzo, altrimenti si verificherà il (d + e - 9)-esimo giorno del mese di
  * aprile.
  * 
  * Si tenga tuttavia conto delle seguenti eccezioni:

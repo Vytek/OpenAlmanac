@@ -26,14 +26,12 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.location.Criteria;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.text.ClipboardManager;
 import android.util.Log;
 import android.view.Menu;
@@ -75,12 +73,11 @@ public class AlmanacList extends Activity {
 	private SimpleAdapter adapter;
 	private static final String TAG = "AlmanacList";
 	private static final String ALMANAC_DATABASE_NAME = "almanac.db";
-	//	private static final String ALMANAC_DATABASE_TABLE = "Saints";
+	//private static final String ALMANAC_DATABASE_TABLE = "Saints";
 	
 	private LocationManager locationManager;
 	private final static long MIN_TIME = 10 * 60000; //10 minuti
 	private final static float MIN_DIST = 1000; //1000 metri
-	//	private boolean mIsNorthernHemi = true;
 
 	/**
 	 * get if this is the first run
