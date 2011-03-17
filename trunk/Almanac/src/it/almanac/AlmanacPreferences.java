@@ -15,13 +15,18 @@
 
 package it.almanac;
 
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.net.Uri;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.util.Log;
 
 public class AlmanacPreferences extends PreferenceActivity {
+	private final String REPORT_AN_ISSUE_BUG_URL = "http://code.google.com/p/almanac/issues/list";
 	private static final String TAG = "PreferenceActivity";
 
 	@Override
@@ -39,5 +44,16 @@ public class AlmanacPreferences extends PreferenceActivity {
 	             StrVersion = "NOT FOUND!";
 		     }
      	findPreference("Version").setSummary(StrVersion);
+     	//Evento Report a BUG
+     	Preference reportAnIssueBug = findPreference("Report_an_issue_bug_key");
+     	reportAnIssueBug.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+			
+			@Override
+			public boolean onPreferenceClick(Preference preference) {
+				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(REPORT_AN_ISSUE_BUG_URL));
+				startActivity(browserIntent);
+				return false;
+			}
+		});    	
 	}
 }

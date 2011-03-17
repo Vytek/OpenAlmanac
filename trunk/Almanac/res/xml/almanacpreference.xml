@@ -11,10 +11,14 @@
 	android:defaultValue="12.545145" />
 </PreferenceCategory>
 <PreferenceCategory android:title="Info"/>
-	<Preference android:title="Version"
+	<Preference
 		 android:key="Version"
-		 android:summary="This allows you to enter a string"
-		 style="?android:preferenceInformationStyle"/>
+		 android:title="@string/preference_info_version" 
+		 android:summary="This allows you to enter a string" style="?android:preferenceInformationStyle"/>
+	<Preference
+			android:key="Report_an_issue_bug_key"
+			android:title="@string/preference_report_an_issue_bug"
+			android:summary="@string/preference_report_an_issue_bug_label" />
 </PreferenceScreen>
 
 

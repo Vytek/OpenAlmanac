@@ -32,6 +32,9 @@
     <string name="preference_category_label">Default coordinates:</string>
     <string name="preference_longitude_label">Insert default Longitude</string>
     <string name="preference_latitude_label">Insert default Latitude</string>
+    <string name="preference_info_version">Version</string>
+    <string name="preference_report_an_issue_bug">Report a Bug</string>
+    <string name="preference_report_an_issue_bug_label">Enter a new bug on Issue Tracker</string>
 	<string-array name="daysofweek_label">
 		<item>Sunday</item>
 		<item>Monday</item>

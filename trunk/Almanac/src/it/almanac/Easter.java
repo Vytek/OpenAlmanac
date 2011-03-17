@@ -52,9 +52,9 @@ import java.util.Date;
  * 
  * Si tenga tuttavia conto delle seguenti eccezioni:
  * 
- * Se la data risultante dalla formula ï¿½ il 26 aprile, allora la Pasqua
- * cadrï¿½ il giorno 19 aprile; Se la data risultante dalla formula ï¿½ il 25
- * aprile e contemporaneamente d = 28, e = 6 e a > 10, allora la Pasqua cadrï¿½
+ * Se la data risultante dalla formula è il 26 aprile, allora la Pasqua
+ * cadrà il giorno 19 aprile; Se la data risultante dalla formula è il 25
+ * aprile e contemporaneamente d = 28, e = 6 e a > 10, allora la Pasqua cadrà
  * il 18 aprile.
  * 
  * Esempio: Data della Pasqua 2007 secondo il calendario gregoriano, in uso in

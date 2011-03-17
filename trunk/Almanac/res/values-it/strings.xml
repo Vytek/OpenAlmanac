@@ -32,6 +32,9 @@
     <string name="preference_category_label">Coordinate di default:</string>
     <string name="preference_longitude_label">Inserire longitudine di partenza</string>
     <string name="preference_latitude_label">Inserire latitudine di partenza</string>
+    <string name="preference_info_version">Versione</string>
+    <string name="preference_report_an_issue_bug">Segnala un Bug</string>
+    <string name="preference_report_an_issue_bug_label">Inserisci un nuovo bug nell\'Issue Tracker</string>
 	<string-array name="daysofweek_label">
 		<item>Domenica</item>
 		<item>Lunedì</item>
