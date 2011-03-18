@@ -29,7 +29,10 @@ public class Almanac extends TabActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-
+		
+		//Show Eula
+		Eula.show(this);
+		
 		TabHost tabHost = getTabHost();
 		TabHost.TabSpec tabSpec;
 		Intent intent;

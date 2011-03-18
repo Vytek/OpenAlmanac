@@ -28,6 +28,8 @@
     <string name="notyetimplemented_label">Funzione non ancora realizzata!</string>
     <string name="longitude_label">Longitudine:</string>
     <string name="latitude_label">Latitudine:</string>
+    <string name="eula_accept_label">Accetta</string>
+    <string name="eula_refuse_label">Refiuta</string>
     <string name="preference_label">Opzioni di Almanac:</string>
     <string name="preference_category_label">Coordinate di default:</string>
     <string name="preference_longitude_label">Inserire longitudine di partenza</string>
