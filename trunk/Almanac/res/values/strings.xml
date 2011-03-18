@@ -28,6 +28,8 @@
     <string name="notyetimplemented_label">Not yet implemented!</string>
     <string name="longitude_label">Longitude:</string>
     <string name="latitude_label">Latitude:</string>
+    <string name="eula_accept_label">Accept</string>
+    <string name="eula_refuse_label">Refuse</string>
     <string name="preference_label">Almanac Options:</string>
     <string name="preference_category_label">Default coordinates:</string>
     <string name="preference_longitude_label">Insert default Longitude</string>
