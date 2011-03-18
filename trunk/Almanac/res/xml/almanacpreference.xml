@@ -1,5 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" android:title="@string/preference_label" android:key="Preference">
+<PreferenceScreen 
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res/it.almanac" 
+android:title="@string/preference_label"
+android:key="Preference">
 <PreferenceCategory android:title="@string/preference_category_label">
 	<EditTextPreference android:title="@string/latitude_label"
 	 android:key="Latitude"
@@ -19,6 +23,23 @@
 			android:key="Report_an_issue_bug_key"
 			android:title="@string/preference_report_an_issue_bug"
 			android:summary="@string/preference_report_an_issue_bug_label" />
+	<it.almanac.AlmanacDialogPreference
+			app:fileName="@string/changelog_filename"
+			android:key="Preference_changelog"
+			android:title="@string/preference_changelog"
+			android:summary="@string/preference_changelog_label"
+			android:dialogIcon="@drawable/ic_dialog_info"
+			android:dialogTitle="@string/preference_changelog"
+			android:negativeButtonText="@null" />
+	<it.almanac.AlmanacDialogPreference
+			app:fileName="@string/eula_filename"
+			android:title="@string/preference_license"
+			android:dialogIcon="@drawable/ic_dialog_info"
+			fileName="@string/eula_filename"
+			android:negativeButtonText="@null"				
+			android:dialogTitle="@string/preference_license"
+			android:summary="@string/preference_license_label"
+			android:key="Preference_eula" />
 </PreferenceScreen>
 
 
