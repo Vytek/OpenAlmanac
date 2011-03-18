@@ -35,6 +35,10 @@
     <string name="preference_info_version">Version</string>
     <string name="preference_report_an_issue_bug">Report a Bug</string>
     <string name="preference_report_an_issue_bug_label">Enter a new bug on Issue Tracker</string>
+    <string name="preference_changelog">Changelog</string>
+    <string name="preference_changelog_label">Visualizza il Changelog dell\'applicazione</string>
+	<string name="preference_license">License</string>
+    <string name="preference_license_label">View the license application</string>
 	<string-array name="daysofweek_label">
 		<item>Sunday</item>
 		<item>Monday</item>

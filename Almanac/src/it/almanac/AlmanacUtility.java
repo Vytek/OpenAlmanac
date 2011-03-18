@@ -3,7 +3,6 @@ package it.almanac;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
-
 import android.content.Context;
 import android.location.Location;
 import android.location.LocationManager;
@@ -13,6 +12,8 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.util.Log;
+import android.view.View;
+import android.webkit.WebView;
 
 /*
  * To call this call:
@@ -37,7 +38,15 @@ public class AlmanacUtility {
 	public Object clone() throws CloneNotSupportedException {
       throw new CloneNotSupportedException();
 	}
-
+	
+	//Sistema per visualizzare file asset HTML
+	public View dialogWebView(Context context, String fileName) {
+		View view = View.inflate(context, R.layout.dialog_webview, null);
+		WebView web = (WebView) view.findViewById(R.id.wv_dialog);
+		web.loadUrl("file:///android_asset/"+fileName);
+		return view;
+	}
+	
 	// La scheda SD e' presente?
 	/*
 	 * @return boolean return true if the application can access the SDCARD on
@@ -49,7 +58,7 @@ public class AlmanacUtility {
 				android.os.Environment.MEDIA_MOUNTED);
 	}
 
-	// Calcolo etï¿½
+	// Calcolo età
 	/*
 	 * @return int return age from date (year, month, day)
 	 */

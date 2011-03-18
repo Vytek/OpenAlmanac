@@ -1,3 +1,9 @@
+13.23 venerdì 18 marzo 2011
+
+Versione 0.0.26
+
+- Aggiunto visualizzazione EULA e ChangeLog su Options
+
 13.58 giovedì 17 marzo 2011
 
 Versione 0.0.25
