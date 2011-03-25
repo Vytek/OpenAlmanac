@@ -1,9 +1,17 @@
+14.16 venerdì 25 marzo 2011
+
+Versione 0.0.27
+
+- Inizio calcolo festvità mobili
+- Aggiunta di alcune funzioni utili
+- Inizio aggiornamento DB in inglese
+
 13.23 venerdì 18 marzo 2011
 
 Versione 0.0.26
 
 - Aggiunto visualizzazione EULA e ChangeLog su Options
-- Aggiunto EULA all'inizio del programma
+- Aggiunto EULA all'inizio del programma quando si apre la prima volta
 
 13.58 giovedì 17 marzo 2011
 

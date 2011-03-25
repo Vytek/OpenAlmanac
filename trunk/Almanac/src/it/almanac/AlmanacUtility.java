@@ -57,7 +57,36 @@ public class AlmanacUtility {
 		return android.os.Environment.getExternalStorageState().equals(
 				android.os.Environment.MEDIA_MOUNTED);
 	}
+	
+	//Calcola la differenza in giorni tra due date
+	/*
+	 * @return integer calculate days between 2 given dates 
+	 */
+	//net.javaiq.examples.date
+	// Modify from: http://www.javaiq.net/examples/date/Days-Between-Calculator-java-code.htm
+	public int getDaysBetween(java.util.Date date1, java.util.Date date2) {
+        if (date1 == null || date2 == null) {
+            return -1;
+        }
 
+        GregorianCalendar gc1 = new GregorianCalendar();
+        gc1.setTime(date1);
+
+        GregorianCalendar gc2 = new GregorianCalendar();
+        gc2.setTime(date2);
+
+
+        if (gc1.get(Calendar.YEAR) == gc2.get(Calendar.YEAR)) {
+            return Math.abs(gc1.get(Calendar.DAY_OF_YEAR) - gc2.get(Calendar.DAY_OF_YEAR));
+        }
+
+        long time1 = date1.getTime();
+        long time2 = date2.getTime();
+        long days = (time1 - time2) / (1000 * 60 * 60 * 24);
+
+        return Math.abs((int)days);
+    }
+	
 	// Calcolo età
 	/*
 	 * @return int return age from date (year, month, day)
