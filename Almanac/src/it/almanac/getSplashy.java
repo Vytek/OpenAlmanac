@@ -32,7 +32,7 @@ public class getSplashy extends Activity {
 					long ms = 0;
 					while (m_bSplashActive && (ms < m_dwSplashTime)) {
 						sleep(100);
-						Log.d("Almanac:Debug", "While cicle");
+						Log.d("Almanac:Debug", "While cicle "+ms);
 						// Only advance the timer if we're running.
 						if (!m_bPaused)
 							ms += 100;
@@ -76,7 +76,8 @@ public class getSplashy extends Activity {
 	protected void onDestroy() {
 		super.onDestroy();
 	}
-
+	
+	//When you touch a key, clear the Splash Screen
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		// if we get any key, clear the Splash Screen
 		super.onKeyDown(keyCode, event);

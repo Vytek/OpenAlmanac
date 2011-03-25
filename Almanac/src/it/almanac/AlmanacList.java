@@ -152,14 +152,14 @@ public class AlmanacList extends Activity {
 	}
 	
 	/*
-	 * 
+	 * Return actual Date
 	 */
 	private Calendar getDate() {
 		return cal;
 	}
 	
 	/*
-	 * 
+	 * Set main date and Update all data
 	 */
 	private void setDate(Calendar date) {
 	    cal = date;
@@ -168,6 +168,22 @@ public class AlmanacList extends Activity {
 	    //Aggiorna dati
 	    //Update data
 	    UpdateAllData();
+	}
+	
+	/*
+	 * 
+	 */
+	private int CalculateEasterAndOtherMobileFestivity(Date dateInput){
+		try {
+			if (Easter.isEaster(dateInput)) {
+				
+			}
+		} catch (EasterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return 0;
 	}
 	
 	/*
@@ -356,7 +372,24 @@ public class AlmanacList extends Activity {
 		// conf.locale.getLanguage(), db); //locale
 		current = SaintDBEvent.getByDateAndLang(Integer.toString(cal.get(Calendar.DAY_OF_MONTH)), 
 				Integer.toString(cal.get(Calendar.MONTH) + 1) , "it", db);
-
+		
+		//Calcola la Pasqua ed altre festività mobili
+		//Calculate Easter and other movable feast
+		switch (CalculateEasterAndOtherMobileFestivity(date)) {
+		  case 50:
+		        //Pentecoste
+		        break;
+		  case 0: 
+		        //Pasqua
+			  	//Easter
+		        break;
+		  case 1:
+			  	//Lunedì dell'Angelo
+			  	break;
+		  default:
+		        // do these if expr != any above
+		}
+		
 		// Get GPS Location!
 		//AlmanacUtility almanac = AlmanacUtility.getInstance();
 
