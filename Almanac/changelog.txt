@@ -1,3 +1,7 @@
+12.14 sabato 26 marzo 2011
+
+- Continuo aggiornamento DB santi (8 Aprile)
+
 14.16 venerdì 25 marzo 2011
 
 Versione 0.0.27
