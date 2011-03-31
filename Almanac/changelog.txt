@@ -1,3 +1,16 @@
+22.50 giovedì 31 marzo 2011
+
+Versione 0.0.28
+
+- Fine aggiornamento DB ora in 2 lingue (ITA, ENG)
+- Aggiornati Credits by Elisabetta (Thank you ;-)
+- Aggiornata parte relativa al "get" da db
+
+17.42 lunedì 28 marzo 2011
+
+- Aggiornato DB
+- Modificate immagini per logo StarTrek e logo Islam
+
 12.14 sabato 26 marzo 2011
 
 - Continuo aggiornamento DB santi (8 Aprile)
@@ -6,7 +19,7 @@
 
 Versione 0.0.27
 
-- Inizio calcolo festvità mobili
+- Inizio calcolo festività mobili
 - Aggiunta di alcune funzioni utili
 - Inizio aggiornamento DB in inglese
 
