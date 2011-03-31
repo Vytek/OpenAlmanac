@@ -223,12 +223,23 @@ public class AlmanacList extends Activity {
 		//Ricalcola il santo
 		Log.d(TAG, "New day: " + Integer.toString(cal.get(Calendar.DAY_OF_MONTH)));
 		Log.d(TAG, "New month: " + Integer.toString(cal.get(Calendar.MONTH) + 1));
-		// current=SaintDBEvent.getByDateAndLang(strTest,
-		// conf.locale.getLanguage(), db); //locale
+		//Get Current Saint
 		if (db.isOpen())
 		{
+			//Debug
+			//Log.d(TAG, locale_long);
+			Log.d(TAG, "Language Default: "+java.util.Locale.getDefault().getLanguage());
+			//Switch IT or EN db
+			//Get Current Saint
+			if (java.util.Locale.getDefault().getLanguage().equals("it")) {
 			current = SaintDBEvent.getByDateAndLang(Integer.toString(cal.get(Calendar.DAY_OF_MONTH)), 
-					Integer.toString(cal.get(Calendar.MONTH) + 1) , "it", db);
+			 		Integer.toString(cal.get(Calendar.MONTH) + 1) , "it", db);
+			}
+			else
+			{
+			current = SaintDBEvent.getByDateAndLang(Integer.toString(cal.get(Calendar.DAY_OF_MONTH)), 
+					Integer.toString(cal.get(Calendar.MONTH) + 1) , "en", db);
+			}
 		}
 		
 		//Ricalcola Sunrise/Sunset
@@ -368,10 +379,20 @@ public class AlmanacList extends Activity {
 
 		Log.d(TAG, "Day: " + Integer.toString(cal.get(Calendar.DAY_OF_MONTH)));
 		Log.d(TAG, "Month: " + Integer.toString(cal.get(Calendar.MONTH) + 1));
-		// current=SaintDBEvent.getByDateAndLang(strTest,
-		// conf.locale.getLanguage(), db); //locale
+		//Debug
+		//Log.d(TAG, locale_long);
+		Log.d(TAG, "Language Default: "+java.util.Locale.getDefault().getLanguage());
+		//Switch IT or EN db
+		//Get Current Saint
+		if (java.util.Locale.getDefault().getLanguage().equals("it")) {
 		current = SaintDBEvent.getByDateAndLang(Integer.toString(cal.get(Calendar.DAY_OF_MONTH)), 
-				Integer.toString(cal.get(Calendar.MONTH) + 1) , "it", db);
+		 		Integer.toString(cal.get(Calendar.MONTH) + 1) , "it", db);
+		}
+		else
+		{
+		current = SaintDBEvent.getByDateAndLang(Integer.toString(cal.get(Calendar.DAY_OF_MONTH)), 
+				Integer.toString(cal.get(Calendar.MONTH) + 1) , "en", db);
+		}
 		
 		//Calcola la Pasqua ed altre festività mobili
 		//Calculate Easter and other movable feast
