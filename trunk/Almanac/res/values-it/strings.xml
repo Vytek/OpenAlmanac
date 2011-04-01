@@ -41,6 +41,9 @@
     <string name="preference_changelog_label">Visualizza il Changelog dell\'applicazione</string>
     <string name="preference_license">Licenza</string>
     <string name="preference_license_label">Visualizza la licenza dell\'applicazione</string>
+    <string name="easter_name_label">Santa Pasqua</string>
+    <string name="easter_description_label">Resurrezione di Gesù Cristo</string>
+    <string name="SaintOfDay_label">Santo del giorno:</string>
 	<string-array name="daysofweek_label">
 		<item>Domenica</item>
 		<item>Lunedì</item>

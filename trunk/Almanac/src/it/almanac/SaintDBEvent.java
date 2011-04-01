@@ -43,4 +43,12 @@ public class SaintDBEvent {
 	public String getSaintDescription() {
 		return (SaintDescription);
 	}
+	
+	public void setSaintName(String NameInput){
+		SaintName = NameInput;
+	}
+	
+	public void setSaintDescription(String DescriptionInput){
+		SaintDescription = DescriptionInput;
+	}
 }

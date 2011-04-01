@@ -171,19 +171,23 @@ public class AlmanacList extends Activity {
 	}
 	
 	/*
+	 * Gauss Alghoritm for Easter and other Festivity 
 	 * 
 	 */
 	private int CalculateEasterAndOtherMobileFestivity(Date dateInput){
+		//Set Var MyReturn
+		int MyReturn = -1;
 		try {
 			if (Easter.isEaster(dateInput)) {
-				
+				MyReturn = 0;
+			}
+			else {
+				MyReturn = -1;
 			}
 		} catch (EasterException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Log.e(TAG, e.getMessage());
 		}
-		
-		return 0;
+		return MyReturn;
 	}
 	
 	/*
@@ -240,6 +244,25 @@ public class AlmanacList extends Activity {
 			current = SaintDBEvent.getByDateAndLang(Integer.toString(cal.get(Calendar.DAY_OF_MONTH)), 
 					Integer.toString(cal.get(Calendar.MONTH) + 1) , "en", db);
 			}
+			
+			//Calcola la Pasqua ed altre festività mobili
+			//Calculate Easter and other movable feast
+			switch (CalculateEasterAndOtherMobileFestivity(date)) {
+			  case 50:
+			        //Pentecoste
+			        break;
+			  case 0: 
+			        //Pasqua
+				  	//Easter
+				  	current.setSaintName(getResources().getString(R.string.easter_name_label));
+				  	current.setSaintDescription(getResources().getString(R.string.easter_description_label));
+			        break;
+			  case 1:
+				  	//Lunedì dell'Angelo
+				  	break;
+			  default:
+			        // do these if expr != any above
+			}
 		}
 		
 		//Ricalcola Sunrise/Sunset
@@ -251,10 +274,10 @@ public class AlmanacList extends Activity {
 		Log.d(TAG, "TimeZone Correct: " + cal.getTimeZone().getID());
 
 		// Calendar date = Calendar.getInstance();
-		dawn = calculator.getCivilSunriseForDate(cal);
-		dusk = calculator.getCivilSunsetForDate(cal);
-		String dawn = calculator.getOfficialSunriseForDate(cal);
-		String dusk = calculator.getOfficialSunsetForDate(cal);
+		//dawn = calculator.getCivilSunriseForDate(cal);
+		//dusk = calculator.getCivilSunsetForDate(cal);
+		dawn = calculator.getOfficialSunriseForDate(cal);
+		dusk = calculator.getOfficialSunsetForDate(cal);
 		Log.d(TAG, "New OfficialcivilSunrise: " + dawn);
 		Log.d(TAG, "New OfficialcivilSunset: " + dusk);
 
@@ -282,18 +305,19 @@ public class AlmanacList extends Activity {
 				+ nowYearFormatted);
 		//Update Star Date
 		data.get(1).put("description", m_stardate.toStardateString());
-		//Update Hijri Calendar
-		data.get(2).put("description", hijriDate);
-		//Update Saint of Day
-		data.get(3).put("event", current.getSaintName());
-		data.get(3).put("description", current.getSaintDescription());
-		//Update Sunrise & Sunsite
-		data.get(4).put("description", dawn + "," + dusk);
-		//Update Moon Phase
-		data.get(5).put("description", getResources().getString(getPhaseText(percent, ww)));
-		data.get(5).put("image", IMAGE_LOOKUP[NumberPhase]);
 		//Update Mayan Calendar
-		data.get(6).put("description", instance.toString());
+		data.get(2).put("description", instance.toString());
+		//Update Hijri Calendar
+		data.get(3).put("description", hijriDate);
+		//Update Saint of Day
+		data.get(4).put("event", current.getSaintName());
+		data.get(4).put("description", current.getSaintDescription());
+		//Update Sunrise & Sunsite
+		data.get(5).put("description", dawn + ", " + dusk);
+		//Update Moon Phase
+		data.get(6).put("description", getResources().getString(getPhaseText(percent, ww)));
+		data.get(6).put("image", IMAGE_LOOKUP[NumberPhase]);
+		//OK Change Data
 		adapter.notifyDataSetChanged();
 	}
 	
@@ -403,6 +427,8 @@ public class AlmanacList extends Activity {
 		  case 0: 
 		        //Pasqua
 			  	//Easter
+			  	current.setSaintName(getResources().getString(R.string.easter_name_label));
+			  	current.setSaintDescription(getResources().getString(R.string.easter_description_label));
 		        break;
 		  case 1:
 			  	//Lunedì dell'Angelo
@@ -425,10 +451,10 @@ public class AlmanacList extends Activity {
 		Log.d(TAG, "TimeZone Correct: " + cal.getTimeZone().getID());
 
 		// Calendar date = Calendar.getInstance();
-		dawn = calculator.getCivilSunriseForDate(cal);
-		dusk = calculator.getCivilSunsetForDate(cal);
-		String dawn = calculator.getOfficialSunriseForDate(cal);
-		String dusk = calculator.getOfficialSunsetForDate(cal);
+		//dawn = calculator.getCivilSunriseForDate(cal);
+		//dusk = calculator.getCivilSunsetForDate(cal);
+		dawn = calculator.getOfficialSunriseForDate(cal);
+		dusk = calculator.getOfficialSunsetForDate(cal);
 		Log.d(TAG, "OfficialCivilSunrise: " + dawn);
 		Log.d(TAG, "OfficialCivilSunset: " + dusk);
 
@@ -466,20 +492,20 @@ public class AlmanacList extends Activity {
 				+ nowYearFormatted, R.drawable.clock));
 		eventList.add(new Event(getResources().getString(R.string.stardate_label),
 				m_stardate.toStardateString(), R.drawable.treklogo));
+		eventList.add(new Event(getResources().getString(R.string.mayan_calendar_label),
+				instance.toString(),
+				R.drawable.mayancalendar));
 		eventList.add(new Event(getResources().getString(R.string.islamic_calendar_label),					
 				hijriDate, R.drawable.islamlogo));
 		eventList.add(new Event(current.getSaintName(),
 				current.getSaintDescription(), R.drawable.angel));
 		eventList.add(new Event(getResources().getString(
-				R.string.sunrisesunsite_label), dawn + "," + dusk,
+				R.string.sunrisesunsite_label), dawn + ", " + dusk,
 				R.drawable.sunrise));
 		eventList.add(new Event(getResources().getString(R.string.moonphase_label),
 				getResources().getString(getPhaseText(percent, ww)),
 				IMAGE_LOOKUP[NumberPhase]));
-		eventList.add(new Event(getResources().getString(R.string.mayan_calendar_label),
-				instance.toString(),
-				R.drawable.mayancalendar));
-
+		
 		// Questa e' la lista che rappresenta la sorgente dei dati della
 		// listview
 		// ogni elemento e' una mappa(chiave->valore)
@@ -560,13 +586,15 @@ public class AlmanacList extends Activity {
 				Log.d(TAG, "OfficialCivilSunset: " + dusk); 
 
 				//Modifico con i dati necessari
-				data.get(4).put("description", dawn + "," + dusk);
+				data.get(5).put("description", dawn + ", " + dusk);
 				adapter.notifyDataSetChanged();
 				
 				//Save Lat and Long in Prefs
 				//Salvo i dati nelle Preference
-				setLatLongPrefs(Double.toString(lng),Double.toString(lng));
-
+				setLatLongPrefs(Double.toString(lat),Double.toString(lng));
+				Log.d(TAG, "Lat saved: "+Double.toString(lat));
+				Log.d(TAG, "Long saved: "+Double.toString(lng));
+				
 				//Finito di aver acquisito i dati spengo
 				//il listener in modo da non occupare troppe risorse
 				locationManager.removeUpdates(locationListener);
@@ -630,18 +658,17 @@ public class AlmanacList extends Activity {
 		                               + ", " + cal.get(Calendar.DATE) + " "
 		                               + strMonths[cal.get(Calendar.MONTH)] + "\n");
 		// " "+nowYearFormatted;
-		strBuffer.append(getResources().getString(R.string.islamic_calendar_label));
-		strBuffer.append(" " + hijriDate + "\n");
 		strBuffer.append(getResources().getString(R.string.stardate_label));
 		strBuffer.append(" " + m_stardate.toStardateString() + "\n");
-		strBuffer.append(current.getSaintName() + " "
-				+ current.getSaintDescription() + "\n");
-		strBuffer.append(getResources().getString(
-				R.string.sunrisesunsite_label) + " " + dawn + "," + dusk + "\n");
-		strBuffer.append(getResources().getString(R.string.moonphase_label)
-				+ " " + getResources().getString(getPhaseText(percent, ww)) + "\n");
 		strBuffer.append(getResources().getString(R.string.mayan_calendar_label)
-				+ " " + instance.toString());
+				+ " " + instance.toString() + "\n");
+		strBuffer.append(getResources().getString(R.string.islamic_calendar_label));
+		strBuffer.append(" " + hijriDate + "\n");
+		strBuffer.append(getResources().getString(R.string.saintofday_label));
+				strBuffer.append(current.getSaintName() + " " + current.getSaintDescription() + "\n");
+		strBuffer.append(getResources().getString(R.string.sunrisesunsite_label) + " " + dawn + "," + dusk + "\n");
+		strBuffer.append(getResources().getString(R.string.moonphase_label)
+				+ " " + getResources().getString(getPhaseText(percent, ww)) + "\n");	
 
 		return strBuffer.toString();
 	}

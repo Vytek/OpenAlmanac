@@ -1,3 +1,14 @@
+11.31 venerdì 1 aprile 2011
+
+Versione 0.0.29
+
+- Corretto errore nel salvataggio delle Lat e Long in Preference. Ora viene salvata l'ultima località in cui
+GPS e/o Triangolagione Wi-Fi/GSM p stata attivata
+- Modificato e spostato il calendario Maya vicino altri calendari
+- Inizio calcolo della Pasqua (Easter) 
+- Corretto orario Alba/Tramonto quando si copia dati in Clipboard
+- Release Version
+
 22.50 giovedì 31 marzo 2011
 
 Versione 0.0.28
