@@ -765,9 +765,10 @@ public class AlmanacList extends Activity {
 		item = menu.add(0, MENUITEM_MAKE_SCREENSHOT_ID, 0, getResources()
 				.getString(R.string.screenshot_label));
 		item.setIcon(android.R.drawable.ic_menu_camera);
-		item = menu.add(0, MENUITEM_TEXT_TO_SPEECH_ID, 0, getResources()
-				.getString(R.string.vocalize_label));
-		item.setIcon(R.drawable.flash);
+		//Don't show Text To Speech Menu
+		//item = menu.add(0, MENUITEM_TEXT_TO_SPEECH_ID, 0, getResources()
+		//		.getString(R.string.vocalize_label));
+		//item.setIcon(R.drawable.flash);
 		item = menu.add(0, MENUITEM_COPY_TO_CLIPBOARD_ID, 0, getResources()
 				.getString(R.string.copytoclipboard_label));
 		item.setIcon(R.drawable.copy);
