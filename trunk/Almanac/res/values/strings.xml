@@ -21,7 +21,7 @@
     <string name="today_label">Today</string>    
     <string name="choose_date_label">Choose date</string>
     <string name="vocalize_label">Vocalize</string>
-    <string name="screenshot_label">Screeshot</string>
+    <string name="screenshot_label">Screenshot</string>
     <string name="options_label">Options</string>
     <string name="copytoclipboard_label">Copy to clipboard</string>
     <string name="copiedtoclipboard_label">Data copied to the clipboard!</string>
