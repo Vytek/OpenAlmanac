@@ -26,7 +26,6 @@ import android.view.MotionEvent;
 
 public class AlmanacSplash extends Activity {
 	/** Called when the activity is first created. */
-
 	boolean m_bSplashActive;
 	boolean m_bPaused;
 
@@ -67,9 +66,7 @@ public class AlmanacSplash extends Activity {
 			}
 		};
 		splashTimer.start();
-
 		setContentView(R.layout.splash);
-
 		return;
 	}
 
