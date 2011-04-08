@@ -265,6 +265,15 @@ public class AlmanacList extends Activity {
 			}
 		}
 		
+		// Get GPS or other Location!
+		AlmanacUtility almanac = AlmanacUtility.getInstance();
+		if  (!almanac.isLocationServiceAvaiable(this.getApplicationContext()))
+		{
+			Toast.makeText(this,
+					getResources().getString(R.string.warning_gps_notactive),
+					Toast.LENGTH_LONG).show();
+		}
+		
 		//Ricalcola Sunrise/Sunset
 		//Metto una location di default (in pratica sara' quella che l'utente
 		//sceglie nelle preference)
@@ -437,9 +446,14 @@ public class AlmanacList extends Activity {
 		        // do these if expr != any above
 		}
 		
-		// Get GPS Location!
-		//AlmanacUtility almanac = AlmanacUtility.getInstance();
-
+		// Get GPS or other Location!
+		AlmanacUtility almanac = AlmanacUtility.getInstance();
+		if  ((almanac.isLocationServiceAvaiable(this.getApplicationContext()))==false)
+		{
+			Toast.makeText(this,
+					getResources().getString(R.string.warning_gps_notactive),
+					Toast.LENGTH_LONG).show();
+		}
 		//Log.d(TAG, "Lat: " + Double.toString(Almanaclocation.getLatitude()));
 		//Log.d(TAG, "Long: " + Double.toString(Almanaclocation.getLongitude()));
 		// Calcola Sunrise/Sunset
