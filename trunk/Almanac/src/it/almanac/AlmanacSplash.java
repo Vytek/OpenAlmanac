@@ -26,17 +26,13 @@ import android.view.MotionEvent;
 
 public class AlmanacSplash extends Activity {
 	/** Called when the activity is first created. */
-	boolean m_bSplashActive;
-	boolean m_bPaused;
-
-	long m_dwSplashTime = 2000;
+	protected boolean m_bSplashActive = true;
+	protected boolean m_bPaused = false;
+	protected long m_dwSplashTime = 2000;
 
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
-
-		m_bPaused = false;
-		m_bSplashActive = true;
 
 		// Very simple timer thread
 		Thread splashTimer = new Thread() {
@@ -56,7 +52,7 @@ public class AlmanacSplash extends Activity {
 							"com.google.app.splashy.CLEARSPLASH"));
 					Log.d("Almanac:Debug",
 							"Start: com.google.app.splashy.CLEARSPLASH");
-				} catch (Exception e) {
+				} catch (InterruptedException e) {
 					// Thread exception
 					// System.out.println(e.toString());
 					Log.e("Almanac:Splash", e.toString());
