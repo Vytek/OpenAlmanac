@@ -2,7 +2,7 @@
 <manifest
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	package="it.almanac"
-	android:installLocation="auto" android:versionName="0.0.30" android:versionCode="30">
+	android:installLocation="auto" android:versionName="0.1.0" android:versionCode="30">
 	<application
 		android:debuggable="false"
 		android:icon="@drawable/icon"
