@@ -9,7 +9,7 @@
 		android:label="@string/app_name"
 		android:theme="@style/AlmanacTheme">
 		<activity
-			android:name=".getSplashy"
+			android:name="AlmanacSplash"
 			android:label="@string/app_name">
 			<intent-filter>
 				<category
