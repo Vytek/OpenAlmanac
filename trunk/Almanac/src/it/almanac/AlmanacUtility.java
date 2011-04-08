@@ -11,6 +11,7 @@ import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
@@ -24,6 +25,7 @@ import android.webkit.WebView;
  */
 
 public class AlmanacUtility {
+	private static final String TAG = "AlmanacUtility";
 	//
 	private static AlmanacUtility instance = new AlmanacUtility();
 
@@ -204,18 +206,23 @@ public class AlmanacUtility {
 	}
 
 	/*
-	 * @return boolean return if GPS in enable
+	 * @return boolean return if GPS or Network Localization is enable or not
 	 */
-	// Modify from: http://www.androidsnippets.org/snippets/168/
 	public boolean isLocationServiceAvaiable(Context context) {
-		LocationManager lm = (LocationManager) context
-				.getSystemService(Context.LOCATION_SERVICE);
-		List<String> providers = lm.getProviders(true);
-
-		if (providers.size() > 0)
-			return true;
-		else
-			return false;
+		String provider = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
+	    if(provider != null){
+	        Log.v(TAG, "Location providers: "+provider);
+	        if(provider.equals("")){
+	        	return false;
+	        }
+	        else {
+	        	//OK
+	        	return true;
+	        }
+	    } else {
+	        // Notify users and show settings if they want to enable GPS
+	    	return false;
+	    }
 	}
 
 	/*

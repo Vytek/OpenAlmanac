@@ -1,3 +1,9 @@
+16.57 venerdì 8 aprile 2011
+
+Versione 0.0.30
+
+- Aggiunto messaggio di Warning quando il sistema di localizzazione è disabilitato
+
 11.31 venerdì 1 aprile 2011
 
 Versione 0.0.29

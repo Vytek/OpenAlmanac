@@ -44,6 +44,8 @@
     <string name="easter_name_label">Easter</string>
     <string name="easter_description_label">Resurrection of Jesus</string>
     <string name="SaintOfDay_label">Saint of day:</string>
+    <string name="warning_gps_notactive">Warning! The tracking system is not active.
+The times of sunrise / sunset are calculated using the default data.</string>
 	<string-array name="daysofweek_label">
 		<item>Sunday</item>
 		<item>Monday</item>
