@@ -1,3 +1,15 @@
+9.21 domenica 10 aprile 2011
+
+Versione 0.1.1
+
+- Correzione di alcuni refusi
+
+9.20 domenica 10 aprile 2011
+
+Versione 0.1.0
+
+- Release Version
+
 16.57 venerdì 8 aprile 2011
 
 Versione 0.0.30
