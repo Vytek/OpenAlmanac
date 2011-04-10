@@ -1,4 +1,4 @@
-//Almanac
+//OpenAlmanac
 //Copyright (C) 2011 Enrico Speranza
 //This program is free software: you can redistribute it and/or modify
 //it under the terms of the GNU General Public License as published by
@@ -13,8 +13,9 @@
 //You should have received a copy of the GNU General Public License
 //along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-package it.almanac;
+package it.openalmanac;
 
+import it.openalmanac.R;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -27,7 +28,7 @@ import android.util.Log;
 
 public class AlmanacPreferences extends PreferenceActivity {
 	private final String REPORT_AN_ISSUE_BUG_URL = "http://code.google.com/p/almanac/issues/list";
-	private static final String TAG = "PreferenceActivity";
+	private static final String TAG = "OpenAlmanacPreference";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

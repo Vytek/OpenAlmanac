@@ -3,9 +3,9 @@
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="lib" path="libs/SunriseSunsetCalculator-1.0-SNAPSHOT.jar"/>
 	<classpathentry kind="lib" path="libs/stardate.jar"/>
-	<classpathentry kind="lib" path="C:/Documents and Settings/root/workspace/Almanac/libs/org.jscience.history.calendars.jar"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="lib" path="libs/HijriCalendar.jar"/>
+	<classpathentry kind="lib" path="libs/org.jscience.history.calendars.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name">Almanac</string>
+	<string name="app_name">OpenAlmanac</string>
 	<string name="almanacinfo">Informazioni</string>
 	<string name="almanacevents">Eventi</string>
 	<string name="todayis_label">Oggi è:</string>

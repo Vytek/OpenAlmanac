@@ -18,7 +18,7 @@
  * Please send bugs or suggestions to Paul Rouse <par@acm.org>
  */
 
-package it.almanac;
+package it.openalmanac;
 
 /** Static methods of this class do the basic maths.
  *  Note you cannot instantiate this class: it is like java.lang.Math.<p>

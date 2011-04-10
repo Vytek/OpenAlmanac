@@ -13,9 +13,9 @@
 //You should have received a copy of the GNU General Public License
 //along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-package it.almanac;
+package it.openalmanac;
 
-import it.almanac.R;
+import it.openalmanac.R;
 
 import android.app.Activity;
 import android.util.Log;
@@ -42,7 +42,7 @@ public class AlmanacSplash extends Activity {
 					long ms = 0;
 					while (m_bSplashActive && (ms < m_dwSplashTime)) {
 						sleep(100);
-						Log.d("Almanac:Debug", "While cicle "+ms);
+						Log.d("OpenAlmanac:Debug", "While cicle "+ms);
 						// Only advance the timer if we're running.
 						if (!m_bPaused)
 							ms += 100;
@@ -55,7 +55,7 @@ public class AlmanacSplash extends Activity {
 				} catch (InterruptedException e) {
 					// Thread exception
 					// System.out.println(e.toString());
-					Log.e("Almanac:Splash", e.toString());
+					Log.e("OpenAlmanac:Splash", e.toString());
 				} finally {
 					finish();
 				}

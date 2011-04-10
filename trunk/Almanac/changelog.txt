@@ -1,8 +1,16 @@
+14.15 domenica 10 aprile 2011
+
+Versione 0.1.2
+
+- Cambio nome in OpenAlmanac
+
 9.21 domenica 10 aprile 2011
 
 Versione 0.1.1
 
 - Correzione di alcuni refusi
+- android:installLocation="auto" android:versionName="0.1.1" android:versionCode="33"> 
+(Cambiare versionCode altrimenti non si installa nuovo pacchetto)
 
 9.20 domenica 10 aprile 2011
 

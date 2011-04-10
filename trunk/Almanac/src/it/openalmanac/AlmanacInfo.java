@@ -1,4 +1,4 @@
-//Almanac
+//OpenAlmanac
 //Copyright (C) 2011 Enrico Speranza
 //This program is free software: you can redistribute it and/or modify
 //it under the terms of the GNU General Public License as published by
@@ -13,9 +13,9 @@
 //You should have received a copy of the GNU General Public License
 //along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-package it.almanac;
+package it.openalmanac;
 
-import it.almanac.R;
+import it.openalmanac.R;
 
 import android.app.Activity;
 import android.content.res.Configuration;
@@ -29,12 +29,12 @@ import java.util.Locale;
 
 public class AlmanacInfo extends Activity {
 	
-	private static final String TAG = "AlmanacInfo";
+	private static final String TAG = "OpenAlmanacInfo";
 	final String mimeType = "text/html";
 	final String encoding = "utf-8";
 	// final String html =
 	// "<h1>Header</h1><p>Custom HTML</p><p><img src=\"file:///android_asset/image1.jpg\" /></p>";
-	final String html = "<html><body>Informazioni <b>Almanac</b></body></html>";
+	final String html = "<html><body>Informazioni <b>OpenAlmanac</b></body></html>";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

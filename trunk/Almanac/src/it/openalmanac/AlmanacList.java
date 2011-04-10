@@ -1,4 +1,4 @@
-//Almanac
+//OpenAlmanac
 //Copyright (C) 2011 Enrico Speranza
 //This program is free software: you can redistribute it and/or modify
 //it under the terms of the GNU General Public License as published by
@@ -13,7 +13,7 @@
 //You should have received a copy of the GNU General Public License
 //along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-package it.almanac;
+package it.openalmanac;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -46,7 +46,7 @@ import android.graphics.drawable.GradientDrawable.Orientation;
 import android.graphics.Color;
 
 import org.stardate.Stardate;
-import it.almanac.R;
+import it.openalmanac.R;
 import com.luckycatlabs.sunrisesunset.dto.Location;
 import com.luckycatlabs.sunrisesunset.SunriseSunsetCalculator;
 import astroLib.HijriCalendar;
@@ -71,7 +71,7 @@ public class AlmanacList extends Activity {
 	private double lng;
 	private ArrayList<HashMap<String, Object>> data;
 	private SimpleAdapter adapter;
-	private static final String TAG = "AlmanacList";
+	private static final String TAG = "OpenAlmanacList";
 	private static final String ALMANAC_DATABASE_NAME = "almanac.db";
 	//private static final String ALMANAC_DATABASE_TABLE = "Saints";
 	

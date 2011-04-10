@@ -13,7 +13,7 @@
 //limitations under the License.
 //Url: http://andcode.netsons.org/
 
-package it.almanac;
+package it.openalmanac;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -43,7 +43,7 @@ public class AlmanacSQLiteDatabaseAdapter extends SQLiteOpenHelper {
 	// /data/data/pkgNameOfYourApplication/databases/
 	private static String DB_PATH_PREFIX = "/data/data/";
 	private static String DB_PATH_SUFFIX = "/databases/";
-	private static final String TAG = "AlmanacSQLiteDatabaseAdapter";
+	private static final String TAG = "OpenAlmanacSQLiteDatabaseAdapter";
 	private Context context;
 
 	/***
