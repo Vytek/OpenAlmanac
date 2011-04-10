@@ -1,4 +1,4 @@
-//Almanac
+//OpenAlmanac
 //Copyright (C) 2011 Enrico Speranza
 //This program is free software: you can redistribute it and/or modify
 //it under the terms of the GNU General Public License as published by
@@ -13,9 +13,9 @@
 //You should have received a copy of the GNU General Public License
 //along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-package it.almanac;
+package it.openalmanac;
 
-import it.almanac.R;
+import it.openalmanac.R;
 
 import android.util.Log;
 import android.app.TabActivity;

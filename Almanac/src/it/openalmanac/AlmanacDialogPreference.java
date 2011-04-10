@@ -17,8 +17,9 @@
  *  
  */
 
-package it.almanac;
+package it.openalmanac;
 
+import it.openalmanac.R;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.res.TypedArray;

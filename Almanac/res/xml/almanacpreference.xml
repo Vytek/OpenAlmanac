@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen 
 xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res/it.almanac" 
+xmlns:app="http://schemas.android.com/apk/res/it.openalmanac" 
 android:title="@string/preference_label"
 android:key="Preference">
 <PreferenceCategory android:title="@string/preference_category_label">
@@ -23,7 +23,7 @@ android:key="Preference">
 			android:key="Report_an_issue_bug_key"
 			android:title="@string/preference_report_an_issue_bug"
 			android:summary="@string/preference_report_an_issue_bug_label" />
-	<it.almanac.AlmanacDialogPreference
+	<it.openalmanac.AlmanacDialogPreference
 			app:fileName="@string/changelog_filename"
 			android:key="Preference_changelog"
 			android:title="@string/preference_changelog"
@@ -31,7 +31,7 @@ android:key="Preference">
 			android:dialogIcon="@drawable/ic_dialog_info"
 			android:dialogTitle="@string/preference_changelog"
 			android:negativeButtonText="@null" />
-	<it.almanac.AlmanacDialogPreference
+	<it.openalmanac.AlmanacDialogPreference
 			app:fileName="@string/eula_filename"
 			android:title="@string/preference_license"
 			android:dialogIcon="@drawable/ic_dialog_info"
