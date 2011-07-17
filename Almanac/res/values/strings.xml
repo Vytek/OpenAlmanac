@@ -24,6 +24,8 @@
     <string name="screenshot_label">Screenshot</string>
     <string name="options_label">Options</string>
     <string name="copytoclipboard_label">Copy to clipboard</string>
+    <string name="sharedata_label">Share</string>
+    <string name="sharedata_menu_label">Share using:</string>
     <string name="copiedtoclipboard_label">Data copied to the clipboard!</string>
     <string name="notyetimplemented_label">Not yet implemented!</string>
     <string name="longitude_label">Longitude:</string>
@@ -38,7 +40,7 @@
     <string name="preference_report_an_issue_bug">Report a Bug</string>
     <string name="preference_report_an_issue_bug_label">Enter a new bug on Issue Tracker</string>
     <string name="preference_changelog">Changelog</string>
-    <string name="preference_changelog_label">Visualizza il Changelog dell\'applicazione</string>
+    <string name="preference_changelog_label">Display application Changelog</string>
 	<string name="preference_license">License</string>
     <string name="preference_license_label">View the license application</string>
     <string name="easter_name_label">Easter</string>
