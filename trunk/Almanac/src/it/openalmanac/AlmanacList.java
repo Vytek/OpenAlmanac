@@ -33,6 +33,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.text.ClipboardManager;
+import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -725,7 +726,8 @@ public class AlmanacList extends Activity {
 	private static final int MENUITEM_MAKE_SCREENSHOT_ID = 2;
 	private static final int MENUITEM_TEXT_TO_SPEECH_ID = 3;
 	private static final int MENUITEM_COPY_TO_CLIPBOARD_ID = 4;
-	private static final int MENUITEM_OPTIONS_ID = 5;
+	private static final int MENUITEM_SHARE_DATA_ID = 5;
+	private static final int MENUITEM_OPTIONS_ID = 6;
 	
 	private static final int DATE_DIALOG_ID = 1;
 
@@ -783,6 +785,9 @@ public class AlmanacList extends Activity {
 		//item = menu.add(0, MENUITEM_TEXT_TO_SPEECH_ID, 0, getResources()
 		//		.getString(R.string.vocalize_label));
 		//item.setIcon(R.drawable.flash);
+		item = menu.add(0, MENUITEM_SHARE_DATA_ID, 0, getResources()
+				.getString(R.string.sharedata_label));
+		item.setIcon(android.R.drawable.ic_menu_share); 
 		item = menu.add(0, MENUITEM_COPY_TO_CLIPBOARD_ID, 0, getResources()
 				.getString(R.string.copytoclipboard_label));
 		item.setIcon(R.drawable.copy);
@@ -837,6 +842,12 @@ public class AlmanacList extends Activity {
 					getResources().getString(R.string.copiedtoclipboard_label),
 					Toast.LENGTH_SHORT).show();
 			return true;
+		case MENUITEM_SHARE_DATA_ID:
+			Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+			sharingIntent.setType("text/html");
+			sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, Html.fromHtml("<p>"+CopyToClipboard()+"</p>"));
+			startActivity(Intent.createChooser(sharingIntent,getResources().getString(R.string.sharedata_menu_label)));
+			return true;			
 		case MENUITEM_OPTIONS_ID:
 			startActivity(new Intent(this, AlmanacPreferences.class));
 			return true;

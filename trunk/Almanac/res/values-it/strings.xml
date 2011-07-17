@@ -23,6 +23,8 @@
     <string name="vocalize_label">Vocalizza</string>
     <string name="screenshot_label">Cattura schermo</string>
     <string name="copytoclipboard_label">Copia in Appunti</string>
+    <string name="sharedata_label">Condividi</string>
+    <string name="sharedata_menu_label">Condividi con:</string>
     <string name="options_label">Opzioni</string>
     <string name="copiedtoclipboard_label">Dati copiati negli appunti!</string>
     <string name="notyetimplemented_label">Funzione non ancora realizzata!</string>
