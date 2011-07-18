@@ -687,7 +687,20 @@ public class AlmanacList extends Activity {
 
 		return strBuffer.toString();
 	}
+	
+	/*
+	 *  Share function with menu chooser
+	 */
+	public void share(String subject,String text) {
+		 final Intent intent = new Intent(Intent.ACTION_SEND);
 
+		 intent.setType("text/plain");
+		 intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+		 intent.putExtra(Intent.EXTRA_TEXT, text);
+
+		 startActivity(Intent.createChooser(intent, getString(R.string.sharedata_menu_label)));
+		}
+	
 	private int getPhaseText(int perceValue, boolean ww) {
 		if (perceValue == 0) {
 			return R.string.new_moon;
@@ -725,8 +738,8 @@ public class AlmanacList extends Activity {
 	private static final int MENUITEM_CHOOSE_DATE_ID = 1;
 	private static final int MENUITEM_MAKE_SCREENSHOT_ID = 2;
 	private static final int MENUITEM_TEXT_TO_SPEECH_ID = 3;
-	private static final int MENUITEM_COPY_TO_CLIPBOARD_ID = 4;
-	private static final int MENUITEM_SHARE_DATA_ID = 5;
+	private static final int MENUITEM_SHARE_DATA_ID = 4;
+	private static final int MENUITEM_COPY_TO_CLIPBOARD_ID = 5;
 	private static final int MENUITEM_OPTIONS_ID = 6;
 	
 	private static final int DATE_DIALOG_ID = 1;
@@ -843,10 +856,7 @@ public class AlmanacList extends Activity {
 					Toast.LENGTH_SHORT).show();
 			return true;
 		case MENUITEM_SHARE_DATA_ID:
-			Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-			sharingIntent.setType("text/html");
-			sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, Html.fromHtml("<p>"+CopyToClipboard()+"</p>"));
-			startActivity(Intent.createChooser(sharingIntent,getResources().getString(R.string.sharedata_menu_label)));
+			this.share(getResources().getString(R.string.app_name), CopyToClipboard());
 			return true;			
 		case MENUITEM_OPTIONS_ID:
 			startActivity(new Intent(this, AlmanacPreferences.class));
