@@ -573,7 +573,6 @@ public class AlmanacList extends Activity {
 
 	//Metodi per GPS LocationListener
 	private final LocationListener locationListener = new LocationListener() {
-		@Override
 		public void onLocationChanged(android.location.Location location) {
 
 			// Geocode your current location to find an address.
@@ -620,19 +619,19 @@ public class AlmanacList extends Activity {
 
 		}
 
-		@Override
+		//@Override
 		public void onProviderDisabled(String provider)
 		{
 			Toast.makeText( getApplicationContext(), "Gps Disabled", Toast.LENGTH_SHORT ).show();
 		}
 
-		@Override
+		//@Override
 		public void onProviderEnabled(String provider)
 		{
 			Toast.makeText( getApplicationContext(), "Gps Enabled", Toast.LENGTH_SHORT).show();
 		}
 
-		@Override
+		//@Override
 		public void onStatusChanged(String provider, int status, Bundle extras)
 		{
 		}
