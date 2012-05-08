@@ -49,7 +49,6 @@ public class AlmanacPreferences extends PreferenceActivity {
      	Preference reportAnIssueBug = findPreference("Report_an_issue_bug_key");
      	reportAnIssueBug.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			
-			@Override
 			public boolean onPreferenceClick(Preference preference) {
 				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(REPORT_AN_ISSUE_BUG_URL));
 				startActivity(browserIntent);
